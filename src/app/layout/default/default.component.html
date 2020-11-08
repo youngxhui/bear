@@ -1,0 +1,34 @@
+<nz-layout>
+  <nz-header>
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['index']">首页</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['course']">课程</a>
+      </li>
+      <li nz-menu-item>学习路线</li>
+      <li nz-menu-item>个人中心</li>
+    </ul>
+  </nz-header>
+  <nz-content>
+    <!--    <nz-breadcrumb>-->
+    <!--      <nz-breadcrumb-item>Home</nz-breadcrumb-item>-->
+    <!--      <nz-breadcrumb-item>List</nz-breadcrumb-item>-->
+    <!--      <nz-breadcrumb-item>App</nz-breadcrumb-item>-->
+    <!--    </nz-breadcrumb>-->
+    <div class="inner-content">
+      <div nz-row>
+        <div nz-col nzSpan="2"></div>
+        <div nz-col nzSpan="20">
+          <router-outlet></router-outlet>
+
+        </div>
+        <div nz-col nzSpan="2">
+        </div>
+      </div>
+    </div>
+  </nz-content>
+  <nz-footer>大连理工大学软件学院 &copy; 2020 Power by Angular</nz-footer>
+</nz-layout>

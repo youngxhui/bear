@@ -1,0 +1,29 @@
+<div tab-background>
+  <nz-tabset>
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab">
+      分类：
+      <button class="text-btn" nz-button nzType="text">全部</button>
+      <button class="text-btn" nz-button nzType="text">Spring</button>
+      <button class="text-btn" nz-button nzType="text">Spring Boot</button>
+      <button class="text-btn" nz-button nzType="text">Go web</button>
+      <button class="text-btn" nz-button nzType="text">Ktor</button>
+      <button class="text-btn" nz-button nzType="text">Python</button>
+      <button class="text-btn" nz-button nzType="text">NodeJs</button>
+      <button class="text-btn" nz-button nzType="text">C++</button>
+      <button class="text-btn" nz-button nzType="text">C#</button>
+      <button class="text-btn" nz-button nzType="text">Sxxxx</button>
+      <nz-divider nzPlain></nz-divider>
+      排序方式：
+      <nz-select [(ngModel)]="selectSort">
+        <nz-option nzValue="hot" nzLabel="热度"></nz-option>
+        <nz-option nzValue="new" nzLabel="最新"></nz-option>
+      </nz-select>
+    </nz-tab>
+  </nz-tabset>
+</div>
+
+<div subTip>
+  <div *ngFor="let number of courseNumber" card-content>
+    <app-course-card></app-course-card>
+  </div>
+</div>

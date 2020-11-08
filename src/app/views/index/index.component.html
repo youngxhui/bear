@@ -1,0 +1,10 @@
+<app-carousel></app-carousel>
+<h2 h2-title>今日热门</h2>
+
+<nz-space *ngFor="let number of todayHotCourseNumber" [nzSize]="15.67">
+  <nz-space-item>
+    <app-course-card></app-course-card>
+  </nz-space-item>
+</nz-space>
+
+
