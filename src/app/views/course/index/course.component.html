@@ -23,7 +23,7 @@
 </div>
 
 <div subTip>
-  <div *ngFor="let number of courseNumber" card-content>
-    <app-course-card></app-course-card>
+  <div card-content>
+    <app-course-card *ngFor="let number of courseNumber" card [routerLink]="[1]"></app-course-card>
   </div>
 </div>

@@ -9,15 +9,20 @@ import { CarouselComponent } from './index/carousel/carousel.component';
 import { FormsModule } from '@angular/forms';
 import { CourseModule } from './course/course.module';
 import { ComponentsModule } from '../components/components.module';
+import { RoadmapModule } from './roadmap/roadmap.module';
+import { Page404Component } from './page404/page404.component';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 @NgModule({
-  declarations: [IndexComponent, CarouselComponent],
+  declarations: [IndexComponent, CarouselComponent, Page404Component],
   imports: [CommonModule,
     ViewsRoutingModule,
     SharedModule,
     LayoutModule,
     FormsModule,
     CourseModule,
+    RoadmapModule,
+    NzResultModule,
     ComponentsModule],
 })
 export class ViewsModule {

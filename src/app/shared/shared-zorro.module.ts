@@ -39,6 +39,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzCommentModule } from 'ng-zorro-antd/comment';
 
 export const SHARED_ZORRO_MODULES = [
   NzButtonModule,
@@ -82,5 +83,6 @@ export const SHARED_ZORRO_MODULES = [
   NzUploadModule,
   NzAutocompleteModule,
   NzSpaceModule,
-  NzTagModule
+  NzTagModule,
+  NzCommentModule
 ];
