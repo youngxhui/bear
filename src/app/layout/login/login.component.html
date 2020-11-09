@@ -19,7 +19,7 @@
     </nz-form-item>
     <div nz-row class="login-form-margin">
       <div nz-col [nzSpan]="12">
-        <label nz-checkbox formControlName="remember">
+        <label nz-checkbox formControlName="remember" ngDefaultControl>
           <span>记住我</span>
         </label>
       </div>
@@ -28,7 +28,7 @@
       </div>
     </div>
     <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">登录</button>
-    或 <a> 注册 </a>
+    或 <a routerLink="/register"> 注册 </a>
   </form>
 
 

@@ -6,11 +6,12 @@ import { SharedModule } from '../shared/shared.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
-  declarations: [DefaultComponent, LoginComponent],
-  imports: [CommonModule, SharedModule, NzLayoutModule, RouterModule, ReactiveFormsModule],
+  declarations: [DefaultComponent, LoginComponent, RegisterComponent],
+  imports: [CommonModule, SharedModule, NzLayoutModule, RouterModule, FormsModule, ReactiveFormsModule],
 })
 export class LayoutModule {
 }

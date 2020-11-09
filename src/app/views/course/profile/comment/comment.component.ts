@@ -14,8 +14,7 @@ export class CommentComponent implements OnInit {
     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
   };
   inputValue = '';
-  likes = 0;
-  dislikes = 0;
+
 
   handleSubmit(): void {
     this.submitting = true;
@@ -49,14 +48,6 @@ export class CommentComponent implements OnInit {
 
   // time = formatDistance(new Date(), new Date());
 
-  like(): void {
-    this.likes = 1;
-    this.dislikes = 0;
-  }
 
-  dislike(): void {
-    this.likes = 0;
-    this.dislikes = 1;
-  }
 
 }

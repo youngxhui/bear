@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentComponent implements OnInit {
 
-  constructor() { }
+  likes = 0;
+  dislikes = 0;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  like(): void {
+    this.likes = 1;
+    this.dislikes = 0;
+  }
+
+  dislike(): void {
+    this.likes = 0;
+    this.dislikes = 1;
   }
 
 }
