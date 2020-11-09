@@ -1,4 +1,6 @@
 # Bear
+![Node.js CI](https://github.com/youngxhui/bear/workflows/Node.js%20CI/badge.svg?branch=main)
+![CodeQL](https://github.com/youngxhui/bear/workflows/CodeQL/badge.svg?branch=main)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
