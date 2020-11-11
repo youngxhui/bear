@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IndexService } from '../../core/index.service';
 
 @Component({
   selector: 'app-index',
@@ -9,10 +10,19 @@ export class IndexComponent implements OnInit {
 
   todayHotCourseNumber = [1, 2, 3, 4];
 
-  constructor() {
+  private indexService: IndexService;
+
+  constructor(indexService: IndexService) {
+    this.indexService = indexService;
+
   }
 
   ngOnInit(): void {
+    this.indexService.getBanner().subscribe(
+      next => {
+        console.log(next);
+      }
+    );
   }
 
 }

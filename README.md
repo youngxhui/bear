@@ -1,9 +1,9 @@
 # Bear
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a1ab9fcab5f499694f18ffb49e022ca)](https://app.codacy.com/gh/youngxhui/bear?utm_source=github.com&utm_medium=referral&utm_content=youngxhui/bear&utm_campaign=Badge_Grade)
-
 ![Node.js CI](https://github.com/youngxhui/bear/workflows/Node.js%20CI/badge.svg?branch=main)
 ![CodeQL](https://github.com/youngxhui/bear/workflows/CodeQL/badge.svg?branch=main)
+[![codecov](https://codecov.io/gh/youngxhui/bear/branch/main/graph/badge.svg?token=HD3P7TGKU6)](https://codecov.io/gh/youngxhui/bear)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a1ab9fcab5f499694f18ffb49e022ca)](https://app.codacy.com/gh/youngxhui/bear?utm_source=github.com&utm_medium=referral&utm_content=youngxhui/bear&utm_campaign=Badge_Grade)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
