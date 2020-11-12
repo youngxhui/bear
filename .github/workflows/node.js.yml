@@ -27,4 +27,4 @@ jobs:
     - run: npm ci
     - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCustom --code-coverage
     - run: npm run build
-    - run: bash <(curl -s https://codecov.io/bash) -t CODECOV_TOKEN
+    - run: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
