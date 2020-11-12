@@ -22,8 +22,4 @@ describe('CommentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('like #click', () => {
-
-  });
 });

@@ -1,17 +1,9 @@
 <div tab-background>
   <nz-tabset>
-    <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab">
+    <nz-tab *ngFor="let tip of tips" [nzTitle]="tip.name" (nzSelect)="changeTip(tip.id)">
       分类：
       <button class="text-btn" nz-button nzType="text">全部</button>
-      <button class="text-btn" nz-button nzType="text">Spring</button>
-      <button class="text-btn" nz-button nzType="text">Spring Boot</button>
-      <button class="text-btn" nz-button nzType="text">Go web</button>
-      <button class="text-btn" nz-button nzType="text">Ktor</button>
-      <button class="text-btn" nz-button nzType="text">Python</button>
-      <button class="text-btn" nz-button nzType="text">NodeJs</button>
-      <button class="text-btn" nz-button nzType="text">C++</button>
-      <button class="text-btn" nz-button nzType="text">C#</button>
-      <button class="text-btn" nz-button nzType="text">Sxxxx</button>
+      <button class="text-btn" nz-button nzType="text" *ngFor="let subTip of subTips">{{subTip.name}}</button>
       <nz-divider nzPlain></nz-divider>
       排序方式：
       <nz-select [(ngModel)]="selectSort">

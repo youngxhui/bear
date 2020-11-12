@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
-import { IndexService } from 'src/app/core/index.service';
+import { IndexService } from 'src/app/service/index.service';
 import Banner from 'src/app/entity/banner';
 import Result from 'src/app/entity/result';
 

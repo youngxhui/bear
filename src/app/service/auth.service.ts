@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Base64 } from 'js-base64';
 import Auth from '../entity/auth';
+import { HttpClient } from '@angular/common/http';
+import Result from '../entity/result';
+import { Token } from '../entity/token';
+import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +14,11 @@ export class AuthService {
 
   private auth: Auth;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
+  }
+
+  login(account: string, password: string): Observable<Result<string>> {
+    return this.httpClient.post<Result<string>>('/user/login', {account, password});
   }
 
   /**

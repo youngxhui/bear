@@ -13,9 +13,8 @@ export class IndexService {
   constructor(private http: HttpClient) {
   }
 
-  getBanner(): Observable<Result<Banner>> {
-    console.log('http start ....');
-    return this.http.get<Result<Banner>>('/banner');
+  getBanner(): Observable<Result<Array<Banner>>> {
+    return this.http.get<Result<Array<Banner>>>('/banner/');
   }
 
 }

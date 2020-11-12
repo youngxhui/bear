@@ -5,9 +5,10 @@ import { IndexComponent } from './index/index.component';
 import { LoginComponent } from '../layout/login/login.component';
 import { Page404Component } from './page404/page404.component';
 import { RegisterComponent } from '../layout/register/register.component';
+import { AuthGuard } from '../guard/auth.guard';
 
 const routes: Routes = [{
-  path: '', component: DefaultComponent, children: [
+  path: '', component: DefaultComponent, canActivate: [AuthGuard], children: [
     {path: '', redirectTo: 'index', pathMatch: 'full'},
     {path: 'index', component: IndexComponent},
     {path: 'course', loadChildren: () => import('./course/course.module').then(m => m.CourseModule)},
