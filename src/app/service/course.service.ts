@@ -4,6 +4,7 @@ import Result from '../entity/result';
 import { Observable } from 'rxjs';
 import { Tip } from '../entity/tip';
 import { SubTip } from '../entity/subTip';
+import { Course } from '../entity/course';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class CourseService {
 
   getSubTipByTipId(tipId: number): Observable<Result<Array<SubTip>>> {
     return this.httpClient.get<Result<Array<SubTip>>>(`/subtip/list/enable/${tipId}`);
+  }
+
+  getCourseBySubTips(): Observable<Result<Array<Course>>> {
+    return this.httpClient.get<Result<Array<Course>>>('/');
   }
 
 }

@@ -1,10 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
-import Auth from '../entity/auth';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
-import Result from '../entity/result';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -43,7 +41,9 @@ describe('AuthService', () => {
     localStorage.clear();
     const account = 'test@test.com';
     const password = '123456';
-    service.login(account, password).subscribe(data =>
-      expect(data.data).toEqual(token));
+    service.login(account, password).subscribe(data => {
+      console.log('sub data', data);
+      expect(data.data).toEqual(token);
+    });
   });
 });
