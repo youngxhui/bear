@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Course} from '../../entity/course';
 
 @Component({
   selector: 'app-course-card',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseCardComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  course: Course;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

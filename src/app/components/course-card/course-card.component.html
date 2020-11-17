@@ -1,8 +1,8 @@
 <nz-card nzHoverable course-card style="width:250px" [nzCover]="coverTemplate">
-  <nz-card-meta nzTitle="Vue3.0(正式版)+TS仿知乎专栏企业级项目" nzDescription="中级 28人评价"></nz-card-meta>
-  <nz-rate [ngModel]="2.5" nzAllowHalf nzDisabled></nz-rate>
+  <nz-card-meta nzTitle="{{course.title}}" nzDescription="中级 28人评价"></nz-card-meta>
+  <app-rate value="{{course.title}}"></app-rate>
 </nz-card>
 <ng-template #coverTemplate>
-  <img course-img alt="example" src="https://img3.mukewang.com/szimg/5f65f20c08d369bb06000338-360-202.jpg"
+  <img course-img alt="example" src="{{course.cover}}"
        height="150px"/>
 </ng-template>

@@ -46,8 +46,4 @@ export class CommentComponent implements OnInit {
   }
 
 
-  // time = formatDistance(new Date(), new Date());
-
-
-
 }
