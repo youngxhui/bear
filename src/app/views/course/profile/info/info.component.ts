@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Course} from '../../../../entity/course';
+import { Component, OnInit } from '@angular/core';
+import { Course } from '../../../../entity/course';
 
 @Component({
   selector: 'app-course-info',
@@ -8,12 +8,15 @@ import {Course} from '../../../../entity/course';
 })
 export class InfoComponent implements OnInit {
 
-  course: Course;
+  course: Course = new Course();
+
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.course.title = "123"
+    this.course.rate = 2
   }
 
 }

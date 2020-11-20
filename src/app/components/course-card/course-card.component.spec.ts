@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Course } from 'src/app/entity/course';
 
 import { CourseCardComponent } from './course-card.component';
 
@@ -16,6 +17,7 @@ describe('CourseCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseCardComponent);
     component = fixture.componentInstance;
+    component.course = new Course()
     fixture.detectChanges();
   });
 
