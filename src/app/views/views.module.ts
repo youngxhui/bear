@@ -12,9 +12,10 @@ import { ComponentsModule } from '../components/components.module';
 import { RoadmapModule } from './roadmap/roadmap.module';
 import { Page404Component } from './page404/page404.component';
 import { NzResultModule } from 'ng-zorro-antd/result';
+import { Page403Component } from './page403/page403.component';
 
 @NgModule({
-  declarations: [IndexComponent, CarouselComponent, Page404Component],
+  declarations: [IndexComponent, CarouselComponent, Page404Component, Page403Component],
   imports: [CommonModule,
     ViewsRoutingModule,
     SharedModule,

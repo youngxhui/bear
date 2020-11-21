@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Base64 } from 'js-base64';
+import {Injectable} from '@angular/core';
+import {Base64} from 'js-base64';
 import Auth from '../entity/auth';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import Result from '../entity/result';
-import { Token } from '../entity/token';
-import { catchError } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import {Token} from '../entity/token';
+import {catchError} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class AuthService {
    * @param token 登录后token
    */
   setToken(token: string): void {
-
+    console.log(`token => ${token}`);
     const tokenFields = token.split('.');
     const payload = tokenFields[1];
     const load = Base64.decode(payload);

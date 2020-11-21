@@ -15,8 +15,6 @@ export class CourseCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.course.title = "vue"
-    this.course.cover = "https://img4.sycdn.imooc.com/szimg/5ed0bbc908af61c706000338-360-202.jpg"
   }
 
 }
