@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Course } from 'src/app/entity/course';
 import { IndexService } from '../../service/index.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { IndexService } from '../../service/index.service';
 })
 export class IndexComponent implements OnInit {
 
-  todayHotCourseNumber = [1, 2, 3, 4];
+  // todayHotCourseNumber = [1, 2, 3, 4];
+  courseList:Array<Course> = []
 
   private indexService: IndexService;
 
