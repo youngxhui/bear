@@ -1,16 +1,18 @@
 <div>
-  <h2>{{course.title}}</h2>
-  <nz-tag class="tag" nzColor="lime">简单</nz-tag>
-  <a nz-button nzType="link">授课讲师：{{course.teacher}}</a>
-  <div>线上授课 12课时</div>
+    <h2>{{showCourse.name}}</h2>
+    <nz-tag class="tag" nzColor="lime">简单</nz-tag>
+    <a nz-button nzType="link">授课讲师：{{showCourse.teacher}}</a>
+    <div>线上授课 12课时</div>
 </div>
-<app-rate value="{{course.rate}}"></app-rate>
+<app-rate value="{{showCourse.rate}}"></app-rate>
 <h3>简介</h3>
-<p>bobby老师潜心力作，为1年以上Web开发者打造，Go+Python混合开发微服务框架，让你成为具备双语言后端能力的开发者，倍增你的职场竞争力，为你提供一条与竞争者不同的差异化上升道路</p>
+<p>
+    {{showCourse.description}}
+</p>
 <h3>课程地址</h3>
 <i nz-icon nzType="link" nzTheme="outline"></i>
 <a nz-button nzType="link"
-   href="https://coding.imooc.com/class/453.html">https://coding.imooc.com/class/453.html</a>
+   [href]=showCourse.url>{{showCourse.url}}</a>
 <h3>目录</h3>
 <img src="/assets/menu.png" alt="" height="600px">
 <h3>授课平台/机构</h3>

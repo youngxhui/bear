@@ -1,21 +1,24 @@
 <div tab-background>
-  <nz-tabset>
-    <nz-tab *ngFor="let tip of tips" [nzTitle]="tip.name" (nzSelect)="changeTip(tip.id)">
-      分类：
-      <button class="text-btn" nz-button nzType="text">全部</button>
-      <button class="text-btn" nz-button nzType="text" *ngFor="let subTip of subTips">{{subTip.name}}</button>
-      <nz-divider nzPlain></nz-divider>
-      排序方式：
-      <nz-select [(ngModel)]="selectSort">
-        <nz-option nzValue="hot" nzLabel="热度"></nz-option>
-        <nz-option nzValue="new" nzLabel="最新"></nz-option>
-      </nz-select>
-    </nz-tab>
-  </nz-tabset>
+    <nz-tabset>
+        <nz-tab *ngFor="let tip of tips" [nzTitle]="tip.name" (nzSelect)="changeTip(tip.id)">
+            分类：
+            <button class="text-btn" nz-button nzType="text">全部</button>
+            <button class="text-btn" nz-button nzType="text" *ngFor="let subTip of subTips">{{subTip.name}}</button>
+            <nz-divider nzPlain></nz-divider>
+            排序方式：
+            <nz-select [(ngModel)]="selectSort">
+                <nz-option nzValue="hot" nzLabel="热度"></nz-option>
+                <nz-option nzValue="new" nzLabel="最新"></nz-option>
+            </nz-select>
+        </nz-tab>
+    </nz-tabset>
 </div>
 
 <div subTip>
-  <div card-content>
-    <app-course-card *ngFor="let number of courseNumber" card [routerLink]="[1]"></app-course-card>
-  </div>
+    <div card-content>
+        <app-course-card *ngFor="let course of courseList" card [routerLink]="[course.id]"
+                         [course]="course"></app-course-card>
+    </div>
 </div>
+
+<nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="pageSize"></nz-pagination>

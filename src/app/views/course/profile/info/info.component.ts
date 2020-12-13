@@ -1,22 +1,36 @@
-import {Component, OnInit} from '@angular/core';
-import {Course} from '../../../../entity/course';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Course } from '../../../../entity/course';
 
 @Component({
-  selector: 'app-course-info',
-  templateUrl: './info.component.html',
-  styleUrls: ['./info.component.less']
+    selector: 'app-course-info',
+    templateUrl: './info.component.html',
+    styleUrls: ['./info.component.less']
 })
-export class InfoComponent implements OnInit {
+export class InfoComponent implements OnInit, OnChanges {
 
-  course: Course = new Course();
+    @Input()
+    course: Course = new Course();
 
+    showCourse: Course = new Course();
 
-  constructor() {
-  }
+    constructor() {
+    }
 
-  ngOnInit(): void {
-    this.course.title = '123';
-    this.course.rate = 2;
-  }
+    ngOnInit(): void {
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        for (const prop in changes) {
+            const changedProp = changes[prop];
+            // console.log('current ', changedProp.currentValue);
+            if (!changedProp.isFirstChange()) {
+                // this.course = changedProp.currentValue;
+                this.showCourse = changedProp.currentValue;
+            }
+        }
+        console.log('show course', this.showCourse);
+
+    }
+
 
 }

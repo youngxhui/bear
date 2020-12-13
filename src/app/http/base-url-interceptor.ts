@@ -11,7 +11,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
  */
 @Injectable()
 export class BaseUrlInterceptor implements HttpInterceptor {
-  baseUrl = 'http://localhost:8888';
+  baseUrl = 'http://localhost:8800';
 
   constructor(private messageService: NzMessageService) {
   }

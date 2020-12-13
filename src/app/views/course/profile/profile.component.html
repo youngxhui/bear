@@ -1,15 +1,15 @@
 <div course-img>
-  <img src="https://coding.imooc.com/static/module/class/content/img/469/section4-main.png" width="100%" height="360px"
-       alt="not found">
+    <img [src]=course.cover width="100%" height="360px"
+         alt="not found">
 </div>
 <nz-tabset tab-backgroud>
-  <nz-tab nzTitle="课程信息">
-    <app-course-info></app-course-info>
-  </nz-tab>
-  <nz-tab nzTitle="点评">
-    <app-course-comment></app-course-comment>
-  </nz-tab>
-  <nz-tab nzTitle="笔记">
-    <app-course-note></app-course-note>
-  </nz-tab>
+    <nz-tab nzTitle="课程信息">
+        <app-course-info [course]="course"></app-course-info>
+    </nz-tab>
+    <nz-tab nzTitle="点评">
+        <app-course-comment></app-course-comment>
+    </nz-tab>
+    <nz-tab nzTitle="笔记">
+        <app-course-note></app-course-note>
+    </nz-tab>
 </nz-tabset>

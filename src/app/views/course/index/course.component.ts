@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CourseService } from '../../../service/course.service';
 import { Tip } from '../../../entity/tip';
 import { SubTip } from '../../../entity/subTip';
+import { Course } from '../../../entity/course';
 
 @Component({
     selector: 'app-course',
@@ -13,7 +14,15 @@ export class CourseComponent implements OnInit {
     tips: Tip[] = new Array<Tip>();
     subTips: SubTip[] = new Array<SubTip>();
     selectSort = 'hot';
-    courseNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    /**
+     * 被选中的 id
+     */
+    selectTip = 0;
+    courseList: Array<Course> = [];
+
+    pageIndex = 1;
+    total = 10;
+    pageSize = 10;
 
     constructor(private courseService: CourseService) {
     }
@@ -25,7 +34,9 @@ export class CourseComponent implements OnInit {
     getTip(): void {
         this.courseService.getTip().subscribe(({data}) => {
             this.tips = data;
+            this.selectTip = this.tips[0].id;
             this.getSubTip(this.tips[0].id);
+            this.getCourseByTipId();
         });
     }
 
@@ -41,6 +52,17 @@ export class CourseComponent implements OnInit {
      */
     changeTip(tipId: number): void {
         this.getSubTip(tipId);
+        this.selectTip = tipId;
+        this.getCourseByTipId();
+    }
+
+    getCourseByTipId(): void {
+        this.courseService.getCourseByTip(this.selectTip, this.pageIndex - 1, this.pageSize).subscribe(({data}) => {
+            // this.pageSize = data.totalElements;
+            this.total = data.totalPages;
+            this.courseList = data.content;
+            console.log(data);
+        });
     }
 
 
