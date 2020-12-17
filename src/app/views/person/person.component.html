@@ -19,7 +19,7 @@
 
   <!--extra-->
   <nz-page-header-extra>
-<!--    <button nz-button>Operation</button>-->
+    <!--    <button nz-button>Operation</button>-->
     <!--    <button nz-button>Operation</button>-->
     <button nz-button nzType="primary">关注</button>
   </nz-page-header-extra>
@@ -46,3 +46,32 @@
     </div>
   </nz-page-header-content>
 </nz-page-header>
+<nz-content class="message-content">
+
+  <ul nz-menu nzMode="horizontal">
+    <div nz-menu style="float: left" nzMode="horizontal">
+      <li nz-menu-item nzSelected>
+        <i nz-icon nzType="mail"></i>
+        点评
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="appstore"></i>
+        收藏
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="highlight"></i>
+        笔记
+      </li>
+    </div>
+
+    <div style="float: right">
+      <a nz-button [nzSize]="size" nzType="link" style="font-size: 14px">贡献新课程</a>
+      <a nz-button [nzSize]="size" nzType="link" style="margin-left: 5px;font-size: 14px">贡献新文档</a>
+    </div>
+  </ul>
+
+
+  <div class="inner-content">
+    xxxxxx
+  </div>
+</nz-content>

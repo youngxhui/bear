@@ -5,17 +5,19 @@ import { PersonRoutingModule } from './person.routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import {NzLayoutModule} from 'ng-zorro-antd/layout';
 
 
 @NgModule({
   declarations: [PersonComponent],
-  imports: [
-    CommonModule,
-    PersonRoutingModule,
-    SharedModule,
-    NzPageHeaderModule,
-    NzTypographyModule
-  ]
+    imports: [
+        CommonModule,
+        PersonRoutingModule,
+        SharedModule,
+        NzPageHeaderModule,
+        NzTypographyModule,
+        NzLayoutModule
+    ]
 })
 export class PersonModule {
 }

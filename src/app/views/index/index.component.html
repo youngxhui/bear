@@ -2,5 +2,6 @@
 <h2 h2-title>今日热门</h2>
 
 <div card-content>
-  <app-course-card *ngFor="let course of courseList" [course]="course"></app-course-card>
+  <app-course-card *ngFor="let course of courseList" [course]="course"
+                   card [routerLink]="[1]"></app-course-card>
 </div>
