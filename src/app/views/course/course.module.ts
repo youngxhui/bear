@@ -9,11 +9,15 @@ import { ProfileComponent } from './profile/profile.component';
 import { InfoComponent } from './profile/info/info.component';
 import { CommentComponent } from './profile/comment/comment.component';
 import { NoteComponent } from './profile/note/note.component';
+import { AddComponent } from './add/add.component';
+import {NzLayoutModule} from 'ng-zorro-antd/layout';
+import {NzCascaderModule} from 'ng-zorro-antd/cascader';
 
 
 @NgModule({
-  declarations: [CourseComponent, ProfileComponent, InfoComponent, CommentComponent, NoteComponent],
-  imports: [CommonModule, CourseRoutingModule, SharedModule, ReactiveFormsModule, FormsModule, ComponentsModule],
+  declarations: [CourseComponent, ProfileComponent, InfoComponent, CommentComponent, NoteComponent, AddComponent],
+  // tslint:disable-next-line:max-line-length
+  imports: [CommonModule, CourseRoutingModule, SharedModule, ReactiveFormsModule, FormsModule, ComponentsModule, NzLayoutModule, NzCascaderModule],
 })
 export class CourseModule {
 }

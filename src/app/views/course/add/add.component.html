@@ -1,0 +1,129 @@
+<nz-content class="message-content">
+  <!--进度条-->
+  <nz-steps [nzCurrent]="current">
+    <nz-step nzTitle="课程信息"></nz-step>
+    <nz-step nzTitle="确认信息"></nz-step>
+    <nz-step nzTitle="完成"></nz-step>
+  </nz-steps>
+  <!--content部分-->
+  <div class="steps-content">
+    <div nz-col *ngIf="current === 0" nzSpan="12" nzOffset="7">
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" style="text-align: center;padding: 10px">
+        <nz-form-item>
+          <nz-form-label
+            [nzSm]="6"
+            [nzXs]="24"
+            nzFor="captcha"
+            nzRequired
+            nzTooltipTitle="在填写完成后，点击自动填充，可能会自动填充一部分信息"
+          >
+            课程地址
+          </nz-form-label>
+          <nz-form-control
+            [nzSm]="14"
+            [nzXs]="24"
+            nzErrorTip="请将课程地址粘贴至此处"
+          >
+            <div nz-row [nzGutter]="8">
+              <div nz-col [nzSpan]="12">
+                <input nz-input formControlName="captcha" id="captcha"/>
+              </div>
+              <div nz-col [nzSpan]="12">
+                <button nz-button (click)="getCaptcha($event)">自动填充</button>
+              </div>
+            </div>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">课程名称</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input formControlName="email" id="email"/>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>授课机构</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input type="password" id="password" formControlName="password"
+                   (ngModelChange)="updateConfirmValidator()"/>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>课程简介</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+            <input nz-input type="password" formControlName="checkPassword" id="checkPassword"/>
+            <ng-template #errorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')">
+                Please confirm your password!
+              </ng-container>
+              <ng-container *ngIf="control.hasError('confirm')">
+                Two passwords that you enter is inconsistent!
+              </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired>
+            <span>课程讲师</span>
+          </nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+            <input nz-input id="nickname" formControlName="nickname"/>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="website" nzRequired>授课方式</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-radio-group [(ngModel)]="radioValue" [ngModelOptions]="{standalone: true}">
+              <label nz-radio nzValue="1">线上</label>
+              <label nz-radio nzValue="0">线下</label>
+            </nz-radio-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="website" nzRequired>课程难度</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-radio-group [(ngModel)]="radioValue" [ngModelOptions]="{standalone: true}">
+              <label nz-radio nzValue="1">简单</label>
+              <label nz-radio nzValue="0">一般</label>
+              <label nz-radio nzValue="0">偏难</label>
+            </nz-radio-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="website" nzRequired>课程标签</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-cascader [nzOptions]="nzOptions" [(ngModel)]="values" (ngModelChange)="onChanges($event)"
+                         [ngModelOptions]="{standalone: true}"></nz-cascader>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-upload
+          nzType="drag"
+          [nzMultiple]="true"
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          (nzChange)="handleChange($event)"
+        >
+          <p class="ant-upload-drag-icon">
+            <i nz-icon nzType="inbox"></i>
+          </p>
+          <p class="ant-upload-text">点击或拖拽课程目录图片截图到此处上传</p>
+          <p class="ant-upload-hint">
+            仅支持图片格式JPG/PNG
+          </p>
+        </nz-upload>
+      </form>
+    </div >
+    <div *ngIf="current === 1">新信息展示{{courseEntity.url}}</div>
+    <div *ngIf="current === 2">成功提交课程添加</div>
+  </div>
+  <!--按钮组-->
+  <div class="steps-action">
+    <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+      <span>上一步</span>
+    </button>
+    <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+      <span>下一步</span>
+    </button>
+    <button nz-button nzType="primary" (click)="done()" *ngIf="current === 2">
+      <span>提交</span>
+    </button>
+  </div>
+</nz-content>
