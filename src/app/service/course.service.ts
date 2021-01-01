@@ -6,6 +6,7 @@ import { Tip } from '../entity/tip';
 import { SubTip } from '../entity/subTip';
 import { Course } from '../entity/course';
 import Page from '../entity/page';
+import {TipAndSub} from '../entity/tipAndSub';
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +31,10 @@ export class CourseService {
 
     getCourseById(courseId: number): Observable<Result<Course>> {
         return this.httpClient.get<Result<Course>>(`/course/${courseId}`);
+    }
+
+    getTipsAndSub(): Observable<Result<Array<TipAndSub>>> {
+      return this.httpClient.get<Result<Array<TipAndSub>>>('/banner_tips');
     }
 
 }

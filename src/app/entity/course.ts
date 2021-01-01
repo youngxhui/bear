@@ -1,35 +1,37 @@
 import Level from './level';
-import { SubTip } from './subTip';
-import { Tip } from './tip';
+import {SubTip} from './subTip';
+import {Tip} from './tip';
 
 export class Course {
 
-    id: number;
+  id: number;
 
-    name: string;
+  name: string;
 
-    level: Level;
+  level: Level;
 
-    teacher: string;
+  teacher: string;
 
-    rate: number;
+  rate: number;
 
-    cover: string;
+  catalog: string;
 
-    description: string;
+  cover: string;
 
-    enable: boolean;
+  description: string;
 
-    institution: string;
+  enable: boolean;
 
-    online: boolean;
+  institution: string;
 
-    period: number;
+  online: boolean;
 
-    subTip: SubTip;
+  period: number;
 
-    tip: Tip;
+  subTip: SubTip;
 
-    url: string;
+  tip: Tip;
+
+  url: string;
 
 }
