@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {NzFormTooltipIcon} from 'ng-zorro-antd/form';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {NzUploadChangeParam, NzUploadFile} from 'ng-zorro-antd/upload';
-import {NzCascaderOption} from 'ng-zorro-antd/cascader';
-import {Course} from '../../../entity/course';
+import { Component, OnInit } from '@angular/core';
+import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzCascaderOption } from 'ng-zorro-antd/cascader';
+import { Course } from '../../../entity/course';
 import Level from '../../../entity/level';
-import {CourseService} from '../../../service/course.service';
-import {HttpClient, HttpRequest, HttpResponse} from '@angular/common/http';
-import {filter} from 'rxjs/operators';
+import { CourseService } from '../../../service/course.service';
+import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
+import { filter } from 'rxjs/operators';
 import Result from '../../../entity/result';
 
 
@@ -65,7 +65,8 @@ export class AddComponent implements OnInit {
     console.log('test', file);
     this.fileList = this.fileList.concat(file);
     return false;
-  }
+  };
+
   // 翻页器按钮及内容联动设置
   pre(): void {
     this.current -= 1;
@@ -189,7 +190,7 @@ export class AddComponent implements OnInit {
     console.log('cover', file);
     this.coverFile = this.coverFile.concat(file);
     return false;
-  }
+  };
 
   handleUpload(): void {
     const formData = new FormData();
@@ -224,25 +225,21 @@ export class AddComponent implements OnInit {
     this.catalogFile = this.catalogFile.concat(file);
     console.log('catalogFile is ', this.catalogFile);
     return false;
-  }
+  };
 
   handleCatalogUpload(): void {
     const formData = new FormData();
     // tslint:disable-next-line:no-any
     this.catalogFile.forEach((file: any) => {
-      console.log('foreach', file);
-      formData.append('file[]', file);
+      formData.append('cover', file);
     });
-    console.log('formdata', formData);
     this.uploading = true;
-    // You can use any AJAX library you like
-    const req = new HttpRequest('POST', 'http://localhost:8800/', formData, {
-      // reportProgress: true
-    });
+
     this.http
-      .post<Result<string>>('http://localhost:8800/course/upload/catalog', {catalog: formData})
+      .post<Result<string>>('/course/upload/cover', formData)
       // .request<Result<string>>(req)
-       .pipe(filter(e => e instanceof HttpResponse))
+      // .pipe(data =>{})
+      .pipe(filter(e => e instanceof HttpResponse))
       .subscribe(
         (data) => {
           this.uploading = false;
