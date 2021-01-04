@@ -10,6 +10,7 @@ import { CourseService } from '../../../service/course.service';
 import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { filter } from 'rxjs/operators';
 import Result from '../../../entity/result';
+import { FileService } from '../../../service/file.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class AddComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private http: HttpClient, private msg: NzMessageService,
-              private courseService: CourseService) {
+              private courseService: CourseService, private fileService: FileService) {
   }
 
   // 翻页按钮和index
@@ -221,9 +222,7 @@ export class AddComponent implements OnInit {
 
   // 提交目录图片
   beforeCatalogUpload = (file: NzUploadFile): boolean => {
-    console.log('file is ', file);
     this.catalogFile = this.catalogFile.concat(file);
-    console.log('catalogFile is ', this.catalogFile);
     return false;
   };
 
@@ -231,28 +230,42 @@ export class AddComponent implements OnInit {
     const formData = new FormData();
     // tslint:disable-next-line:no-any
     this.catalogFile.forEach((file: any) => {
-      formData.append('cover', file);
+      console.log('file', file);
+      formData.append('files', file);
     });
+    console.log(formData);
     this.uploading = true;
-
-    this.http
-      .post<Result<string>>('/course/upload/cover', formData)
-      // .request<Result<string>>(req)
-      // .pipe(data =>{})
-      .pipe(filter(e => e instanceof HttpResponse))
-      .subscribe(
-        (data) => {
-          this.uploading = false;
-          console.log('data', data);
-          // this.courseEntity.catalog
-          this.msg.success('upload successfully.');
-        },
-        () => {
-          // console.log('error', e);
-          this.uploading = false;
-          this.msg.error('upload failed.');
-        }
-      );
+    this.fileService.uploadImages(formData, 'cover').subscribe(
+      (data) => {
+        this.uploading = false;
+        this.msg.success('upload successfully.');
+      },
+      () => {
+        console.log('Error');
+        this.uploading = false;
+      },
+      () => {
+        this.uploading = false;
+      }
+    );
+    // this.http
+    //   .post<Result<string>>('/course/upload/cover', formData)
+    //   // .request<Result<string>>(req)
+    //   // .pipe(data =>{})
+    //   .pipe(filter(e => e instanceof HttpResponse))
+    //   .subscribe(
+    //     (data) => {
+    //       this.uploading = false;
+    //       console.log('data', data);
+    //       // this.courseEntity.catalog
+    //       this.msg.success('upload successfully.');
+    //     },
+    //     () => {
+    //       // console.log('error', e);
+    //       this.uploading = false;
+    //       this.msg.error('upload failed.');
+    //     }
+    //   );
     // this.catalogFile = [];
   }
 
