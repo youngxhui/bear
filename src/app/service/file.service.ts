@@ -15,22 +15,17 @@ export class FileService {
    * upload image
    * @param image upload image
    */
-  uploadImg(image: string): Observable<Result<string>> {
-    return this.http.post<Result<string>>('/', {});
+  uploadImg(image: FormData): Observable<Result<string>> {
+    return this.http.post<Result<string>>('/file/upload', image);
   }
 
   /**
-   * todo 这里还有bug
    * upload images
-   * @param files image files
-   * @param type upload file type
+   * @param formData image files
    */
-  uploadImages(files: FormData, type: string): Observable<Result<Map<string, string>>> {
-    const header = new HttpHeaders({
-      'Content-Type': 'multipart/form-data'
-    });
-    const httpOption = {headers: header};
-    return this.http.post<Result<Map<string, string>>>('/file/upload/imgs', {files, type}, httpOption);
+  uploadImages(formData: FormData): Observable<Result<Map<string, string>>> {
+
+    return this.http.post<Result<Map<string, string>>>('/file/upload/imgs', formData);
   }
 
 }

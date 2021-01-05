@@ -230,15 +230,16 @@ export class AddComponent implements OnInit {
     const formData = new FormData();
     // tslint:disable-next-line:no-any
     this.catalogFile.forEach((file: any) => {
-      console.log('file', file);
       formData.append('files', file);
     });
+    formData.append('type', 'cover');
     console.log(formData);
     this.uploading = true;
-    this.fileService.uploadImages(formData, 'cover').subscribe(
+    this.fileService.uploadImages(formData).subscribe(
       (data) => {
         this.uploading = false;
-        this.msg.success('upload successfully.');
+        console.log(data);
+        this.msg.success('添加成功');
       },
       () => {
         console.log('Error');
