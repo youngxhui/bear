@@ -102,7 +102,7 @@
             <nz-input-number [(ngModel)]="minutes" [nzMin]="1" [nzMax]="10" [nzStep]="1" [ngModelOptions]="{standalone: true}"></nz-input-number>分钟
           </nz-form-control>
         </nz-form-item>
-        <nz-form-item>
+         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="period" nzRequired>课程封面</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24">
             <nz-upload [(nzFileList)]="coverFile" [nzBeforeUpload]="beforeCoverUpload" [nzMultiple]="false" [nzLimit]="1"
