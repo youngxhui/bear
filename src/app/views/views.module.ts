@@ -13,6 +13,7 @@ import { RoadmapModule } from './roadmap/roadmap.module';
 import { Page404Component } from './page404/page404.component';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { Page403Component } from './page403/page403.component';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 @NgModule({
   declarations: [IndexComponent, CarouselComponent, Page404Component, Page403Component],

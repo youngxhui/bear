@@ -1,1 +1,4 @@
-
+<nz-content class="message-content">
+  <div echarts [options]="option" class="graph"></div>
+  <div echarts [options]="option1" class="graph" (chartClick)="getItem($event)"></div>
+</nz-content>
