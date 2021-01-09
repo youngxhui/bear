@@ -1,7 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {MarkdownService} from 'ngx-markdown';
-import {EditorConfig} from '../../editor/model/editor-config';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,14 +8,6 @@ import {EditorConfig} from '../../editor/model/editor-config';
   styleUrls: ['./roadmap.component.less']
 })
 export class RoadmapComponent implements OnInit {
-  markdown = '# Hi<br>## Mark<br>Page Content<br>love :heart: **sunshine** ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")\n' +
-    '| Tables        | Are           | Cool  |\n' +
-    '| ------------- |:-------------:| -----:|\n' +
-    '| col 3 is      | right-aligned | $1600 |\n' +
-    '| col 2 is      | centered      |   $12 |\n' +
-    '| zebra stripes | are neat      |    $1 |';
-  // editor参数
-  conf = new EditorConfig();
 
 
   option = {
@@ -428,14 +418,6 @@ export class RoadmapComponent implements OnInit {
     // @ts-ignore
     this.router.navigate([`/course/${event.data.id}`]);
     // console.log(event.data);
-  }
-
-  /**
-   * editor textarea
-   */
-// 同步属性内容
-  syncModel(str): void {
-    this.markdown = str;
   }
 
   constructor(public router: Router) {

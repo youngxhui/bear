@@ -30,22 +30,19 @@
                 "glob": "**/*",
                 "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
                 "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/monaco-editor/min/vs",
+                "output": "/assets/vs/"
               }
             ],
             "styles": [
-              "src/styles.less",
-              "src/assets/editormd/css/editormd.css"
+              "src/styles.less"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.js",
-              "src/assets/editormd/editormd.js",
-              "src/assets/editormd/lib/flowchart.min.js",
-              "src/assets/editormd/lib/jquery.flowchart.min.js",
-              "src/assets/editormd/lib/marked.min.js",
-              "src/assets/editormd/lib/prettify.min.js",
-              "src/assets/editormd/lib/raphael.min.js",
-              "src/assets/editormd/lib/underscore.min.js",
-              "src/assets/editormd/lib/sequence-diagram.min.js"
+              "node_modules/marked/lib/marked.js",
+              "node_modules/emoji-toolkit/lib/js/joypixels.min.js"
             ]
           },
           "configurations": {

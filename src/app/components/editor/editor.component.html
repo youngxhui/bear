@@ -1,0 +1,15 @@
+<div nz-row>
+  <div nz-col nzXs="12">
+    <nz-code-editor style="height: 400px" [(ngModel)]="code"
+                    [nzEditorOption]="{ language: 'markdown' ,minimap: {enabled: false}, wordWrap:'on'}"></nz-code-editor>
+  </div>
+  <div nz-col nzXs="12">
+    <div style="height: 400px;overflow:auto">
+      <markdown emoji  [data]="code" style="height: 400px"></markdown>
+    </div>
+
+<!--    <div markdown [data]="code" style="height: 400px"></div>-->
+  </div>
+</div>
+
+
