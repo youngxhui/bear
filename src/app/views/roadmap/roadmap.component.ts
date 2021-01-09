@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {MarkdownService} from 'ngx-markdown';
+import {EditorConfig} from '../../editor/model/editor-config';
 
 
 @Component({
@@ -7,6 +10,16 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./roadmap.component.less']
 })
 export class RoadmapComponent implements OnInit {
+  markdown = '# Hi<br>## Mark<br>Page Content<br>love :heart: **sunshine** ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")\n' +
+    '| Tables        | Are           | Cool  |\n' +
+    '| ------------- |:-------------:| -----:|\n' +
+    '| col 3 is      | right-aligned | $1600 |\n' +
+    '| col 2 is      | centered      |   $12 |\n' +
+    '| zebra stripes | are neat      |    $1 |';
+  // editor参数
+  conf = new EditorConfig();
+
+
   option = {
     title: {
       text: '开发学习路线'
@@ -19,7 +32,7 @@ export class RoadmapComponent implements OnInit {
         type: 'graph',
         layout: 'none',
         symbolSize: 50,
-        roam: true,
+        // roam: true,
         symbol: 'roundRect',
         label: {
           show: true
@@ -33,7 +46,7 @@ export class RoadmapComponent implements OnInit {
           id: 1,
           name: '初级程序员',
           x: 470,
-          y: 100,
+          y: 0,
           itemStyle: {
             color: 'rgb(221, 107, 102)'
           },
@@ -178,7 +191,7 @@ export class RoadmapComponent implements OnInit {
           target: 5
         }, {
           source: 0,
-          target: 7
+          target: 6
         }, {
           source: 4,
           target: 8
@@ -229,7 +242,7 @@ export class RoadmapComponent implements OnInit {
   };
   option1 = {
     title: {
-      text: 'CDA学习路线'
+      text: '开发学习路线'
     },
     tooltip: {},
     animationDurationUpdate: 1500,
@@ -239,7 +252,7 @@ export class RoadmapComponent implements OnInit {
         type: 'graph',
         layout: 'none',
         symbolSize: 50,
-        roam: true,
+        symbol: 'roundRect',
         label: {
           show: true
         },
@@ -249,77 +262,183 @@ export class RoadmapComponent implements OnInit {
           fontSize: 20
         },
         data: [{
-          name: '节点1',
-          x: 300,
-          y: 300,
-          children: [
-            {
-              name: 'VUE',
-              x: 400,
-              y: 400
-            }
-          ]
+          id: 1,
+          name: '数据分析员',
+          x: 470,
+          y: 0,
+          itemStyle: {
+            color: 'rgb(221, 107, 102)'
+          },
+          symbolSize: 80
         }, {
-          name: '节点2',
-          x: 800,
-          y: 300
+          id: 2,
+          name: '数据运营',
+          x: 70,
+          y: 200,
+          itemStyle: {
+            color: 'rgb(117, 154, 160)'
+          },
+          symbolSize: 110
         }, {
-          name: '节点3',
-          x: 550,
-          y: 100
+          id: 3,
+          name: '数据产品经理',
+          x: 230,
+          y: 200,
+          itemStyle: {
+            color: 'rgb(230, 157, 135)'
+          },
+          symbolSize: 100
         }, {
-          name: '节点4',
-          x: 550,
-          y: 500
+          id: 4,
+          name: '高级数据产品经理',
+          x: 380,
+          y: 200,
+          itemStyle: {
+            color: 'rgb(141, 193, 169)'
+          },
+          symbolSize: 100
+        }, {
+          id: 5,
+          name: '数据分析师',
+          x: 530,
+          y: 200,
+          itemStyle: {
+            color: 'rgb(234, 126, 83)'
+          },
+          symbolSize: 70
+        }, {
+          id: 6,
+          name: '大数据工程师',
+          x: 650,
+          y: 200,
+          itemStyle: {
+            color: 'rgb(238, 221, 120)'
+          }
+        }, {
+          name: '高级建模分析师',
+          x: 750,
+          y: 200,
+          itemStyle: {
+            color: 'rgb(41, 60, 85)'
+          }
+        }, {
+          name: '大数据架构师',
+          x: 850,
+          y: 200,
+          itemStyle: {
+            color: 'rgb(41, 60, 85)'
+          }
+        }, {
+          name: '机器学习',
+          x: 520,
+          y: 350,
+          itemStyle: {
+            color: 'rgb(41, 60, 85)'
+          },
+          symbolSize: 70
+        }, {
+          name: 'CV工程师',
+          x: 680,
+          y: 350,
+          itemStyle: {
+            color: 'rgb(41, 60, 85)'
+          },
+          symbolSize: 80
+        }, {
+          name: 'NLP工程师',
+          x: 810,
+          y: 350,
+          itemStyle: {
+            color: 'rgb(41, 60, 85)'
+          },
+          symbolSize: 70
+        }, {
+          name: '高级AI工程师',
+          x: 370,
+          y: 350,
+          itemStyle: {
+            color: 'rgb(41, 60, 85)'
+          },
+          symbolSize: 100
+        }, {
+          name: '数据科学家',
+          x: 220,
+          y: 350,
+          itemStyle: {
+            color: 'rgb(41, 60, 85)'
+          },
+          symbolSize: 100
         }],
-        // links: [],
         links: [{
           source: 0,
           target: 1,
-          symbolSize: [5, 20],
-          label: {
-            show: true
-          },
-          lineStyle: {
-            width: 5,
-            curveness: 0.2
-          }
         }, {
-          source: '节点2',
-          target: '节点1',
-          label: {
-            show: true
-          },
-          lineStyle: {
-            curveness: 0.2
-          }
+          source: 0,
+          target: 4,
         }, {
-          source: '节点1',
-          target: '节点3'
+          source: 1,
+          target: 2
         }, {
-          source: '节点2',
-          target: '节点3'
+          source: 2,
+          target: 3
         }, {
-          source: '节点2',
-          target: '节点4'
+          source: 4,
+          target: 5
         }, {
-          source: '节点1',
-          target: '节点4'
+          source: 4,
+          target: 6
+        }, {
+          source: 5,
+          target: 7
+        }, {
+          source: 8,
+          target: 9
+        }, {
+          source: 8,
+          target: 10
+        }, {
+          source: 9,
+          target: 11
+        }, {
+          source: 10,
+          target: 11
+        }, {
+          source: 11,
+          target: 12
+        }, {
+          source: 6,
+          target: 12
+        }, {
+          source: 7,
+          target: 12
         }],
         lineStyle: {
           opacity: 0.9,
           width: 2,
           curveness: 0
+        },
+        force: {
+          repulsion: 950
         }
       }
     ]
   };
 
   getItem(event: unknown): void {
-    console.log(event);
+    // @ts-ignore
+    this.router.navigate([`/course/${event.data.id}`]);
+    // console.log(event.data);
   }
 
-  constructor() {
+  /**
+   * editor textarea
+   */
+// 同步属性内容
+  syncModel(str): void {
+    this.markdown = str;
+  }
+
+  constructor(public router: Router) {
   }
 
   ngOnInit(): void {
