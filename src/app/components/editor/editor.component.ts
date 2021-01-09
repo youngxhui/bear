@@ -20,6 +20,7 @@ export class EditorComponent implements OnInit {
     '| col 3 is      | right-aligned | $1600 |\n' +
     '| col 2 is      | centered      |   $12 |\n' +
     '| zebra stripes | are neat      |    $1 |';
+
   constructor() {
   }
 
