@@ -4,6 +4,7 @@ import {Tip} from '../../../entity/tip';
 import {SubTip} from '../../../entity/subTip';
 import {Course} from '../../../entity/course';
 import {ActivatedRoute} from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-course',
@@ -29,6 +30,7 @@ export class CourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // img =  img );
     const learnId = Number(this.route.snapshot.paramMap.get('id'));
     if (learnId !== 0) {
       this.getLearnAndSub(learnId);
@@ -65,9 +67,9 @@ export class CourseComponent implements OnInit {
   getCourseByTipId(): void {
     this.courseService.getCourseByTip(this.selectTip, this.pageIndex - 1, this.pageSize).subscribe(({data}) => {
       // this.pageSize = data.totalElements;
-      this.total = data.totalPages;
+      this.total = data.totalElements;
       this.courseList = data.content;
-      console.log(data);
+      console.log('page data ', data);
     });
   }
 

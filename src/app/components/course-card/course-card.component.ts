@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Course} from '../../entity/course';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-course-card',
@@ -11,13 +12,10 @@ export class CourseCardComponent implements OnInit {
   @Input()
   course: Course = new Course();
 
-  constructor() {
+  constructor(private sanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
-    this.course.name = 'ssssss';
-    // this.course.level.name = 'Hard';
-
   }
 
 }

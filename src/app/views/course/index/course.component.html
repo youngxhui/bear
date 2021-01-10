@@ -16,9 +16,10 @@
 
 <div subTip>
     <div card-content>
-        <app-course-card *ngFor="let course of courseList" card [routerLink]="[course.id]"
+        <app-course-card *ngFor="let course of courseList; let i = index" card [routerLink]="[course.id]"
                          [course]="course"></app-course-card>
     </div>
 </div>
 
-<nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="pageSize"></nz-pagination>
+<nz-pagination [(nzPageIndex)]="pageIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="pageSize"
+(nzPageIndexChange)="getCourseByTipId()"></nz-pagination>
