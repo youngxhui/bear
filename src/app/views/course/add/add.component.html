@@ -82,9 +82,9 @@
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="level" nzRequired>课程难度</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24">
             <nz-radio-group [(ngModel)]="level" [ngModelOptions]="{standalone: true}">
-              <label nz-radio nzValue=1>简单</label>
-              <label nz-radio nzValue=2>一般</label>
-              <label nz-radio nzValue=3>偏难</label>
+              <label nz-radio nzValue="1">简单</label>
+              <label nz-radio nzValue="2">一般</label>
+              <label nz-radio nzValue="3">偏难</label>
             </nz-radio-group>
           </nz-form-control>
         </nz-form-item>
@@ -98,8 +98,8 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="period" nzRequired>课程时长</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24">
-            <nz-input-number [(ngModel)]="hour" [nzMin]="1" [nzMax]="10" [nzStep]="1"[ngModelOptions]="{standalone: true}"></nz-input-number>小时
-            <nz-input-number [(ngModel)]="minutes" [nzMin]="1" [nzMax]="10" [nzStep]="1" [ngModelOptions]="{standalone: true}"></nz-input-number>分钟
+            <nz-input-number [(ngModel)]="hour" [nzMin]="0" [nzMax]="5000" [nzStep]="1"[ngModelOptions]="{standalone: true}"></nz-input-number>小时
+            <nz-input-number [(ngModel)]="minutes" [nzMin]="0" [nzMax]="60" [nzStep]="1" [ngModelOptions]="{standalone: true}"></nz-input-number>分钟
           </nz-form-control>
         </nz-form-item>
          <nz-form-item>
@@ -161,7 +161,7 @@
         </tr>
         <tr>
           <td>课程难度</td>
-          <td>{{courseEntity.level.name}}</td>
+          <td>{{levelname}}</td>
         </tr>
         <tr>
           <td>授课方式</td>
@@ -171,17 +171,28 @@
       </nz-table>
 
     </div>
-    <div *ngIf="current === 2">成功提交课程添加</div>
+    <div *ngIf="current === 2">
+      <nz-result
+        nzStatus="success"
+        nzTitle="新建课程信息成功"
+        nzSubTitle="请为课程做出评价，让其他小伙伴来了解更多吧~"
+      >
+        <div nz-result-extra>
+<!--          <button nz-button nzType="primary">Go Console</button>-->
+<!--          <button nz-button>Buy Again</button>-->
+        </div>
+      </nz-result>
+    </div>
   </div>
   <!--按钮组-->
   <div class="steps-action">
-    <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+    <button nz-button nzType="default" (click)="pre()" *ngIf="current === 1">
       <span>上一步</span>
     </button>
-    <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+    <button nz-button nzType="default" (click)="next()" *ngIf="current < 1">
       <span>下一步</span>
     </button>
-    <button nz-button nzType="primary" (click)="done()" [nzLoading]="uploading" [disabled]="catalogFile.length == 0" *ngIf="current === 2">
+    <button nz-button nzType="primary" (click)="done()" [nzLoading]="uploading" [disabled]="catalogFile.length == 0" *ngIf="current === 1">
       <span>提交</span>
     </button>
   </div>

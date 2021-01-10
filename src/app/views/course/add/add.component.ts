@@ -39,7 +39,8 @@ export class AddComponent implements OnInit {
   // 授课模式
   online = '1';
   // 难度
-  level = 1;
+  level = '1';
+  levelname = '简单';
   // tab级联选择
 
   // 级联选择
@@ -62,11 +63,6 @@ export class AddComponent implements OnInit {
   // 目录列表
   catalogFile: NzUploadFile[] = [];
   fileList: NzUploadFile[] = [];
-  beforeUpload = (file: NzUploadFile): boolean => {
-    console.log('test', file);
-    this.fileList = this.fileList.concat(file);
-    return false;
-  };
 
   // 翻页器按钮及内容联动设置
   pre(): void {
@@ -80,9 +76,8 @@ export class AddComponent implements OnInit {
   }
 
   done(): void {
-    // this.courseService
-    // this.handleUpload();
-    this.handleCatalogUpload();
+    this.current += 1;
+    this.handleCoverUpload();
   }
 
   changeContent(): void {
@@ -100,15 +95,17 @@ export class AddComponent implements OnInit {
         this.courseEntity.description = this.validateForm.controls.description.value;
         this.courseEntity.teacher = this.validateForm.controls.teacher.value;
         this.courseEntity.online = this.online !== '0';
-        const temp = new Level();
-        if (this.level === 1) {
-          temp.name = '简单';
-        } else if (this.level === 2) {
-          temp.name = '一般';
+        this.courseEntity.tipId = Number(this.values[0]);
+        this.courseEntity.subTipId = Number(this.values[1]);
+        this.courseEntity.levelId = Number(this.level);
+        // @ts-ignore
+        if (this.level === '1') {
+          this.levelname = '简单';
+        } else if (this.level === '2') {
+          this.levelname = '一般';
         } else {
-          temp.name = '困难';
+          this.levelname = '困难';
         }
-        this.courseEntity.level = temp;
         break;
       }
       case 2: {
@@ -121,6 +118,19 @@ export class AddComponent implements OnInit {
     }
   }
 
+  // 发起课程信息提交请求
+  submitCourse(): void{
+    this.courseService.saveOne(this.courseEntity).subscribe(
+      (data) => {
+        console.log('添加成功', data);
+      },
+      () => {
+        console.log('Error');
+      },
+      () => {
+      }
+    );
+  }
 
   // 表单内容部分
   submitForm(): void {
@@ -133,32 +143,6 @@ export class AddComponent implements OnInit {
 
   getCourseUrl(e: MouseEvent): void {
     e.preventDefault();
-  }
-
-  // 上传图片
-
-  handleChange({file, fileList}: NzUploadChangeParam): void {
-    const status = file.status;
-    if (status !== 'uploading') {
-      console.log(file, fileList);
-    }
-    if (status === 'done') {
-      this.msg.success(`${file.name} file uploaded successfully.`);
-    } else if (status === 'error') {
-      this.msg.error(`${file.name} file upload failed.`);
-    }
-  }
-
-  handleCover({file, fileList}: NzUploadChangeParam): void {
-    const status = file.status;
-    if (status !== 'uploading') {
-      console.log(file, fileList);
-    }
-    if (status === 'done') {
-      this.msg.success(`${file.name} file uploaded successfully.`);
-    } else if (status === 'error') {
-      this.msg.error(`${file.name} file upload failed.`);
-    }
   }
 
   getTipAndSub(): void {
@@ -191,40 +175,49 @@ export class AddComponent implements OnInit {
     console.log('cover', file);
     this.coverFile = this.coverFile.concat(file);
     return false;
-  };
+  }
 
-  handleUpload(): void {
+  handleCoverUpload(): void {
     const formData = new FormData();
     // tslint:disable-next-line:no-any
     this.coverFile.forEach((file: any) => {
-      formData.append('files[]', file);
+      formData.append('files', file);
     });
+    formData.append('type', 'cover');
     this.uploading = true;
-    // You can use any AJAX library you like
-    const req = new HttpRequest('POST', 'https://www.mocky.io/v2/5cc8019d300000980a055e76', formData, {
-      // reportProgress: true
-    });
-    this.http
-      .request(req)
-      .pipe(filter(e => e instanceof HttpResponse))
-      .subscribe(
-        () => {
-          this.uploading = false;
-          this.coverFile = [];
-          this.msg.success('upload successfully.');
-        },
-        () => {
-          this.uploading = false;
-          this.msg.error('upload failed.');
+    this.fileService.uploadImages(formData).subscribe(
+      (data) => {
+        // console.log('file upload res is ', data);
+        // @ts-ignore
+        const temp = data.data.paths;
+        // @ts-ignore
+        const rootPath = data.data.root;
+        var s = '';
+        for (let i = 0; i < temp.length; i++) {
+          s = s + rootPath + '/' + temp[i] + '】【';
         }
-      );
+        console.log('s is ', s);
+        this.courseEntity.cover = s;
+        this.uploading = false;
+        this.coverFile = [];
+        this.handleCatalogUpload();
+        this.msg.success('封面上传成功');
+      },
+      () => {
+        this.uploading = false;
+        this.msg.error('Error.');
+      },
+      () => {
+        this.uploading = false;
+      }
+    );
   }
 
   // 提交目录图片
   beforeCatalogUpload = (file: NzUploadFile): boolean => {
     this.catalogFile = this.catalogFile.concat(file);
     return false;
-  };
+  }
 
   handleCatalogUpload(): void {
     const formData = new FormData();
@@ -232,13 +225,23 @@ export class AddComponent implements OnInit {
     this.catalogFile.forEach((file: any) => {
       formData.append('files', file);
     });
-    formData.append('type', 'cover');
+    formData.append('type', 'catalog');
     console.log(formData);
     this.uploading = true;
     this.fileService.uploadImages(formData).subscribe(
       (data) => {
         this.uploading = false;
-        console.log(data);
+        // @ts-ignore
+        const temp = data.data.paths;
+        // @ts-ignore
+        const rootPath = data.data.root;
+        var s = '';
+        for (let i = 0; i < temp.length; i++) {
+          s = s + rootPath + '/' + temp[i] + '】【';
+        }
+        console.log('s is ', s);
+        this.courseEntity.catalog = s;
+        this.submitCourse();
         this.msg.success('添加成功');
       },
       () => {
@@ -249,25 +252,6 @@ export class AddComponent implements OnInit {
         this.uploading = false;
       }
     );
-    // this.http
-    //   .post<Result<string>>('/course/upload/cover', formData)
-    //   // .request<Result<string>>(req)
-    //   // .pipe(data =>{})
-    //   .pipe(filter(e => e instanceof HttpResponse))
-    //   .subscribe(
-    //     (data) => {
-    //       this.uploading = false;
-    //       console.log('data', data);
-    //       // this.courseEntity.catalog
-    //       this.msg.success('upload successfully.');
-    //     },
-    //     () => {
-    //       // console.log('error', e);
-    //       this.uploading = false;
-    //       this.msg.error('upload failed.');
-    //     }
-    //   );
-    // this.catalogFile = [];
   }
 
   ngOnInit(): void {

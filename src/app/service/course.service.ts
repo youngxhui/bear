@@ -41,4 +41,8 @@ export class CourseService {
   getTipAndCourse(learnId: number): Observable<Result<LearnAndSub>> {
     return this.httpClient.get<Result<LearnAndSub>>(`/learnAndSubTip/${learnId}`);
   }
+
+  saveOne(course: Course): Observable<Result<any>> {
+    return this.httpClient.post<Result<any>>('/course', course);
+  }
 }

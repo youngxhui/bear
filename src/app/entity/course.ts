@@ -8,30 +8,30 @@ export class Course {
 
   name: string;
 
-  level: Level;
-
-  teacher: string;
-
-  rate: number;
-
-  catalog: string;
-
   cover: string;
+
+  tipId: number;
+
+  subTipId: number;
 
   description: string;
 
-  enable: boolean;
-
   institution: string;
 
-  online: boolean;
+  levelId: number;
+
+  catalog: string;
+
+  url: string;
 
   period: number;
 
-  subTip: SubTip;
+  teacher: string;
 
-  tip: Tip;
+  online: boolean;
 
-  url: string;
+  rate: number;
+
+  enable: boolean;
 
 }

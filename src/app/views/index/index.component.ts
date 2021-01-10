@@ -27,7 +27,7 @@ export class IndexComponent implements OnInit {
         const level = new Level();
         level.name = '困难';
         level.id = 2;
-        this.course.level = level;
+        // this.course.levelId = level;
         this.course.cover = 'https://img1.sycdn.imooc.com/szimg/5fbc6dba09d42b9e05400304.jpg';
         this.courseList = [this.course];
         this.indexService.getBanner().subscribe(

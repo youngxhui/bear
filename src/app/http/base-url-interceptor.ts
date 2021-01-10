@@ -27,7 +27,7 @@ export class BaseUrlInterceptor implements HttpInterceptor {
         }
       }, err => {
         if (err.status !== 200) {
-          this.messageService.error(err.error.message);
+          this.messageService.error('发生了错误');
         }
       })
     );

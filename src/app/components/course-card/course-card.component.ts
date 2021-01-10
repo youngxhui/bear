@@ -16,7 +16,7 @@ export class CourseCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.course.name = 'ssssss';
-    this.course.level.name = 'Hard';
+    // this.course.level.name = 'Hard';
 
   }
 
