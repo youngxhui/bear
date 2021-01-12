@@ -1,15 +1,16 @@
 <div course-img>
-    <img [src]=course.cover width="100%" height="360px"
-         alt="not found">
+  <img [src]="this.sanitizer.bypassSecurityTrustResourceUrl('http://localhost:8800/'+showCourse.cover.split('】【')[0])"
+       width="100%" height="360px"
+       alt="not found">
 </div>
 <nz-tabset tab-backgroud>
-    <nz-tab nzTitle="课程信息">
-        <app-course-info [course]="course"></app-course-info>
-    </nz-tab>
-    <nz-tab nzTitle="点评">
-        <app-course-comment></app-course-comment>
-    </nz-tab>
-    <nz-tab nzTitle="笔记">
-        <app-course-note></app-course-note>
-    </nz-tab>
+  <nz-tab nzTitle="课程信息">
+    <app-course-info [showCourse]="showCourse"></app-course-info>
+  </nz-tab>
+  <nz-tab nzTitle="点评">
+    <app-course-comment></app-course-comment>
+  </nz-tab>
+  <nz-tab nzTitle="笔记">
+    <app-course-note></app-course-note>
+  </nz-tab>
 </nz-tabset>

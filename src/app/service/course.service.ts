@@ -8,6 +8,7 @@ import {Course} from '../entity/course';
 import Page from '../entity/page';
 import {TipAndSub} from '../entity/tipAndSub';
 import {LearnAndSub} from '../entity/learnAndSub';
+import {ShowCourse} from '../entity/ShowCourse';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,8 @@ export class CourseService {
   }
 
 
-  getCourseById(courseId: number): Observable<Result<Course>> {
-    return this.httpClient.get<Result<Course>>(`/course/${courseId}`);
+  getCourseById(courseId: number): Observable<Result<ShowCourse>> {
+    return this.httpClient.get<Result<ShowCourse>>(`/course/${courseId}`);
   }
 
   getTipsAndSub(): Observable<Result<Array<TipAndSub>>> {

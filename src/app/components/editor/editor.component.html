@@ -1,6 +1,6 @@
 <div nz-row>
   <div nz-col nzXs="12">
-    <nz-code-editor style="height: 400px" [(ngModel)]="code"
+    <nz-code-editor style="height: 400px" [(ngModel)]="code" (ngModelChange)="changeCode()"
                     [nzEditorOption]="{ language: 'markdown' ,minimap: {enabled: false}, wordWrap:'on'}"></nz-code-editor>
   </div>
   <div nz-col nzXs="12">

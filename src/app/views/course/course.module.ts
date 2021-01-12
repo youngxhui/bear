@@ -19,7 +19,8 @@ import {NzResultModule} from 'ng-zorro-antd/result';
 @NgModule({
   declarations: [CourseComponent, ProfileComponent, InfoComponent, CommentComponent, NoteComponent, AddComponent],
   // tslint:disable-next-line:max-line-length
-  imports: [CommonModule, CourseRoutingModule, SharedModule, ReactiveFormsModule, FormsModule, ComponentsModule, NzLayoutModule, NzCascaderModule, NzDescriptionsModule, NzResultModule],
+  imports: [CommonModule, CourseRoutingModule, SharedModule, ReactiveFormsModule, FormsModule,
+    ComponentsModule, NzLayoutModule, NzCascaderModule, NzDescriptionsModule, NzResultModule],
 })
 export class CourseModule {
 }

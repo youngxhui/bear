@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-editor',
@@ -6,14 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./editor.component.less']
 })
 export class EditorComponent implements OnInit {
-
+  @Output()
+  soonOutput: EventEmitter<string> = new EventEmitter();
   code = '# Hi' +
     '\n' +
     '## Mark' +
     '\n' +
     'Page Content' +
     '\n' +
-    'love :heart: **sunshine** ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")\n' +
+    'love :heart: **sunshine** ![alt text](https://island-hexo.oss-cn-beijing.aliyuncs.com/new_compose.png "Logo Title Text 1")\n' +
     '\n' +
     '| Tables        | Are           | Cool  |\n' +
     '| ------------- |:-------------:| -----:|\n' +
@@ -25,6 +26,10 @@ export class EditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  changeCode(): void {
+    this.soonOutput.emit(this.code);
   }
 
 }

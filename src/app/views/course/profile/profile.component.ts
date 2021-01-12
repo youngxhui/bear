@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from '../../../entity/course';
 import { CourseService } from '../../../service/course.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {ShowCourse} from '../../../entity/ShowCourse';
 
 @Component({
     selector: 'app-profile',
@@ -11,9 +13,9 @@ import { CourseService } from '../../../service/course.service';
 export class ProfileComponent implements OnInit {
 
     courseId: number;
-    course = new Course();
+    showCourse = new ShowCourse();
 
-    constructor(private route: ActivatedRoute, private courseService: CourseService) {
+    constructor(private route: ActivatedRoute, private courseService: CourseService, public sanitizer: DomSanitizer) {
     }
 
     ngOnInit(): void {
@@ -22,10 +24,9 @@ export class ProfileComponent implements OnInit {
     }
 
     getCourseInfo(): void {
-        console.log('course id', this.courseId);
         this.courseService.getCourseById(this.courseId).subscribe(({data}) => {
-            this.course = data;
-            console.log(this.course);
+            this.showCourse = data;
+            console.log('course info', this.showCourse);
         });
 
     }
