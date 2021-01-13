@@ -1,11 +1,11 @@
-<button nz-button nzType="primary" routerLink="/note/{{courseId}}">{{btn}}</button>
+<button nz-button nzType="primary" routerLink="/note/{{courseId}}">添加笔记</button>
 <div style="margin-top: 20px">
   <nz-list nzItemLayout="vertical">
     <nz-list-item *ngFor="let item of data">
       <nz-list-item-meta>
         <nz-list-item-meta-avatar [nzSrc]="item.avatar"> </nz-list-item-meta-avatar>
         <nz-list-item-meta-title>
-          <a href="{{ item.href }}">{{ item.title }}</a>
+          <a (click)="detail(item.entity)">{{ item.title }}</a>
         </nz-list-item-meta-title>
         <nz-list-item-meta-description>
           {{ item.description }}
@@ -22,4 +22,7 @@
       </nz-list-item-extra>
     </nz-list-item>
   </nz-list>
+</div>
+<div style="margin-top: 20px">
+  <nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalPage" (nzPageIndexChange)="changePageIndex()"></nz-pagination>
 </div>

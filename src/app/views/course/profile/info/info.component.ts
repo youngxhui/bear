@@ -33,7 +33,6 @@ export class InfoComponent implements OnInit, OnChanges {
         this.showCourse = changedProp.currentValue;
       }
     }
-    console.log('show course', this.showCourse);
 
   }
 

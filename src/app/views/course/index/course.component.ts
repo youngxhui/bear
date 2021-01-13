@@ -69,7 +69,6 @@ export class CourseComponent implements OnInit {
       // this.pageSize = data.totalElements;
       this.total = data.totalElements;
       this.courseList = data.content;
-      console.log('page data ', data);
     });
   }
 

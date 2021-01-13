@@ -26,7 +26,6 @@ export class ProfileComponent implements OnInit {
     getCourseInfo(): void {
         this.courseService.getCourseById(this.courseId).subscribe(({data}) => {
             this.showCourse = data;
-            console.log('course info', this.showCourse);
         });
 
     }
