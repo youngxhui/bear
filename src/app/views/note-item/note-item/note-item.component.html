@@ -1,0 +1,27 @@
+<nz-content class="message-content">
+  <nz-page-header class="site-page-header" (nzBack)="onBack()" nzBackIcon nzTitle="添加课程笔记" nzSubtitle="Markdown编辑">
+  </nz-page-header>
+  <div style="width: 100%;padding: 24px" *ngIf="isSubmitted === 0">
+    <input nz-input placeholder="请输入笔记标题" [(ngModel)]="value" />
+    <div style="height: 20px;width: 100%"></div>
+    <app-editor (soonOutput)="receive($event)" style="margin-top: 20px"></app-editor>
+    <button nz-button [nzType]="'primary'" (click)="showModal()"><span>提交</span></button>
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="添加笔记" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <ng-container >
+        <p>确定提交吗</p>
+      </ng-container>
+    </nz-modal>
+  </div>
+  <div style="width: 100%;padding: 24px" *ngIf="isSubmitted === 1">
+    <nz-result
+      nzStatus="success"
+      nzTitle="添加课程笔记成功"
+      nzSubTitle="感谢您对在线教育做出的贡献，让其他小伙伴来了解更多吧~"
+    >
+      <div nz-result-extra>
+        <!--          <button nz-button nzType="primary">Go Console</button>-->
+        <!--          <button nz-button>Buy Again</button>-->
+      </div>
+    </nz-result>
+  </div>
+</nz-content>
