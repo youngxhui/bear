@@ -8,6 +8,7 @@ import { CommentComponent } from './comment/comment.component';
 import { EditorComponent } from './editor/editor.component';
 import { NzCodeEditorModule } from 'ng-zorro-antd/code-editor';
 import { MarkdownModule } from 'ngx-markdown';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { MarkdownModule } from 'ngx-markdown';
     EditorComponent
   ],
   imports: [
-    CommonModule, SharedModule, FormsModule, NzCodeEditorModule, MarkdownModule
+    CommonModule, SharedModule, FormsModule, NzCodeEditorModule, MarkdownModule, NzImageModule
   ]
 })
 export class ComponentsModule {

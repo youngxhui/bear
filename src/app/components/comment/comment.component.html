@@ -1,18 +1,14 @@
-<div class="comment">
-  <nz-avatar nzSize="default" nzIcon="user"></nz-avatar>
-  <div class="content">
-    <div class="header">
-      <span class="username">张三</span>
-      <app-rate class="rate"></app-rate>
-      <nz-tag [nzColor]="'red'">热评</nz-tag>
-    </div>
-    <p>We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure),
-      to help people create their product prototypes beautifully and efficiently. </p>
-    <div class="action">
-      <!--这里还需要进行样式优化-->
-      <button nz-button nzType="text" (click)="like()"><i nz-icon nzType="like"></i> {{likes}}</button>
-      <button nz-button nzType="text" (click)="dislike()"><i nz-icon nzType="dislike"></i> {{dislikes}} </button>
-    </div>
-  </div>
-
-</div>
+<nz-list [nzDataSource]="commentList" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+  <ng-template #item let-item>
+    <nz-comment [nzAuthor]="item.username" [nzDatetime]="item.datetime">
+      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
+      <nz-comment-content>
+        <p>{{ item.content }}</p>
+        <nz-image-group *ngFor="let pic of item.picture.split('】【').slice(0, item.picture.split('】【').length - 1)">
+          <img nz-image width="80px" [src]="this.sanitizer.bypassSecurityTrustResourceUrl('http://localhost:8800/'+pic)"  alt=""/>
+        </nz-image-group>
+      </nz-comment-content>
+    </nz-comment>
+  </ng-template>
+</nz-list>
+<nz-pagination [nzPageSize]="1"  [(nzPageIndex)]="pageIndex" [nzTotal]="totalEle" (nzPageIndexChange)="changePageIndex()"></nz-pagination>

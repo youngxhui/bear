@@ -30,19 +30,17 @@ export class NoteComponent implements OnInit {
   soonOutput: EventEmitter<Note> = new EventEmitter();
 
   constructor(private route: ActivatedRoute, private noteService: NoteService, private router: Router) {
-    this.courseId = Number(this.route.snapshot.paramMap.get('id'));
   }
-
   ngOnInit(): void {
+    this.courseId = Number(this.route.snapshot.paramMap.get('id'));
     this.loadData(0);
   }
 
   loadData(pi: number): void {
     this.noteService.getByCourseId(this.courseId, pi).subscribe(
       (data) => {
-        console.log('note', data);
         // @ts-ignore
-        this.totalPage = data.data.totalPages;
+        this.totalPage = data.data.totalElements;
         // @ts-ignore
         const temp = data.data.content;
         this.data = new Array(temp.length).fill({}).map((_, index) => {

@@ -9,6 +9,7 @@ import Page from '../entity/page';
 import {TipAndSub} from '../entity/tipAndSub';
 import {LearnAndSub} from '../entity/learnAndSub';
 import {ShowCourse} from '../entity/ShowCourse';
+import {Comment} from "../entity/Comment";
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,13 @@ export class CourseService {
 
   saveOne(course: Course): Observable<Result<any>> {
     return this.httpClient.post<Result<any>>('/course', course);
+  }
+
+  saveComment(comment: Comment): Observable<Result<any>> {
+    return this.httpClient.post<Result<any>>('/comment', comment);
+  }
+
+  getAllCommentByCourseId(courseId: number, page: number): Observable<Result<Page<Comment>>> {
+    return this.httpClient.get<Result<Page<Comment>>>(`/comment/course/${courseId}?page=${page}&size=10`);
   }
 }

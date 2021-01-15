@@ -1,29 +1,90 @@
-<nz-list *ngIf="data.length" [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
-  <ng-template #item let-item>
-    <nz-comment [nzAuthor]="item.author" [nzDatetime]="item.displayTime">
-      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
-      <nz-comment-content>
-        <p>{{ item.content }}</p>
-      </nz-comment-content>
-    </nz-comment>
-  </ng-template>
-</nz-list>
-<nz-comment>
-  <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
-  <nz-comment-content>
-    <nz-form-item>
-      <label>
-        <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
-      </label>
-    </nz-form-item>
-    <nz-form-item>
-      <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="handleSubmit()">
-        Add Comment
-      </button>
-    </nz-form-item>
-  </nz-comment-content>
-</nz-comment>
+<nz-tabset nzType="card">
+  <nz-tab [nzTitle]="'文字'">
+    <div *ngIf="commentVisible">
+      <nz-comment>
+        <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+        <nz-comment-content>
+          <nz-form-item>
+            <div>
+              <span class="ant-rate-text">课程质量：</span>
+              <nz-rate [(ngModel)]="score"></nz-rate>
+            </div>
+          </nz-form-item>
+          <nz-form-item>
+            <div>
+              <span class="ant-rate-text">性价比 ：</span>
+              <nz-rate [(ngModel)]="costPerformance"></nz-rate>
+            </div>
+          </nz-form-item>
+          <nz-form-item>
+            <div>
+              <span class="ant-rate-text">推荐度 ：</span>
+              <nz-rate [(ngModel)]="recommend"></nz-rate>
+            </div>
+          </nz-form-item>
+          <nz-form-item>
+            <label>
+              <textarea [(ngModel)]="inputValue" nz-input rows="4" style="width: 700px"></textarea>
+            </label>
+          </nz-form-item>
+          <nz-form-item>
+            <div class="clearfix">
+              <nz-upload
+                nzListType="picture-card"
+                [(nzFileList)]="fileList"
+                [nzShowButton]="fileList.length < 9"
+                [nzPreview]="handlePreview"
+                [nzBeforeUpload]="beforeUpload"
+              >
+                <div>
+                  <i nz-icon nzType="plus"></i>
+                  <div style="margin-top: 8px">Upload</div>
+                </div>
+              </nz-upload>
+              <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
+                <ng-template #modalContent>
+                  <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                </ng-template>
+              </nz-modal>
+            </div>
+          </nz-form-item>
+          <nz-form-item>
+            <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue"
+                    (click)="showModal()">
+              提交评论
+            </button>
+          </nz-form-item>
+        </nz-comment-content>
+      </nz-comment>
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="添加评论" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container>
+          <p>确定提交评论吗</p>
+        </ng-container>
+      </nz-modal>
+    </div>
+    <div>
+      <h3>全部评论（{{totalEle}}）</h3>
+      <nz-list [nzDataSource]="commentList" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+        <ng-template #item let-item>
+          <nz-comment [nzAuthor]="item.username" [nzDatetime]="item.datetime">
+            <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
+            <nz-comment-content>
+              <p>{{ item.content }}</p>
+              <div *ngIf="item.picture!==null&&item.picture.length!==0">
+                <nz-image-group  *ngFor="let pic of item.picture.split('】【').slice(0, item.picture.split('】【').length - 1)">
+                  <img *ngIf="pic.length!==0&&pic!==null" nz-image width="80px" [src]="this.sanitizer.bypassSecurityTrustResourceUrl('http://localhost:8800/'+pic)"  alt=""/>
+                </nz-image-group>
+              </div>
+            </nz-comment-content>
+          </nz-comment>
+        </ng-template>
+      </nz-list>
+      <nz-pagination [nzPageSize]="10"  [(nzPageIndex)]="pageIndex" [nzTotal]="totalEle" (nzPageIndexChange)="changePageIndex()"></nz-pagination>
 
-<h3>全部评论（1000+）</h3>
+    </div>
+  </nz-tab>
+  <nz-tab [nzTitle]="'图表'">
+    <div>图表格式的</div>
+  </nz-tab>
+</nz-tabset>
 
-<app-comment></app-comment>
