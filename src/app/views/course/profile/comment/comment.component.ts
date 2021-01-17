@@ -103,6 +103,73 @@ export class CommentComponent implements OnInit {
     }]
   };
   // 词云的
+  // 第二排的图表中的图
+  chartoption1 = {
+    xAxis: {
+      type: 'category',
+      show: false
+    },
+    yAxis: {
+      type: 'value',
+      show: false
+    },
+    grid: {
+      height: 50
+    },
+    series: [{
+      data: [820, 932, 901, 934, 1290, 1330, 1320],
+      type: 'line',
+      smooth: true,
+      symbol: 'none',
+      itemStyle: {
+        normal: {
+          color: '#389fff', // 折点颜色
+          lineStyle: {
+            color: '#389fff' // 折线颜色
+          }
+        }
+      },
+      areaStyle: {
+        color: '#d0e9ff'
+      }
+    }]
+  };
+  // 表格
+  listOfData = [
+    {
+      key: '1',
+      name: 'John Brown',
+      age: 32,
+      address: 'New York No. 1 Lake Park'
+    },
+    {
+      key: '2',
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: '3',
+      name: 'Joe Black',
+      age: 32,
+      address: 'Sidney No. 1 Lake Park'
+    }
+  ];
+  // 课程热度
+  hotoption = {
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+      data: [820, 932, 901, 934, 1290, 1330, 1320],
+      type: 'line'
+    }]
+  };
+
 
   constructor(private courseService: CourseService, private fileService: FileService, private msg: NzMessageService,
               private authService: AuthService, private route: ActivatedRoute, public sanitizer: DomSanitizer) {

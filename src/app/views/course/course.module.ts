@@ -16,6 +16,7 @@ import {NzDescriptionsModule} from 'ng-zorro-antd/descriptions';
 import {NzResultModule} from 'ng-zorro-antd/result';
 import {NzImageModule} from 'ng-zorro-antd/image';
 import {NgxEchartsModule} from 'ngx-echarts';
+import {NzStatisticModule} from 'ng-zorro-antd/statistic';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import {NgxEchartsModule} from 'ngx-echarts';
     SharedModule,
     ReactiveFormsModule, FormsModule,
     ComponentsModule, NzLayoutModule, NzCascaderModule, NzDescriptionsModule, NzResultModule, NzImageModule,
-    NgxEchartsModule],
+    NgxEchartsModule, NzStatisticModule],
 })
 export class CourseModule {
 }

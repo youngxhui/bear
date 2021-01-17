@@ -55,4 +55,8 @@ export class CourseService {
   getAllCommentByCourseId(courseId: number, page: number): Observable<Result<Page<Comment>>> {
     return this.httpClient.get<Result<Page<Comment>>>(`/comment/course/${courseId}?page=${page}&size=10`);
   }
+
+  getFigureData(courseId: number): Observable<Result<any>> {
+    return this.httpClient.get<Result<any>>('/goodfigure');
+  }
 }
