@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {RoadMapService} from "../../service/road-map.service";
 
 
 @Component({
@@ -420,10 +421,15 @@ export class RoadmapComponent implements OnInit {
     // console.log(event.data);
   }
 
-  constructor(public router: Router) {
+  constructor(public router: Router, private roadService: RoadMapService) {
   }
 
   ngOnInit(): void {
+    // this.roadService.test().subscribe(
+    //   (data) => {
+    //     console.log('road map', data);
+    //   }
+    // );
   }
 
 }

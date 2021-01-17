@@ -6,7 +6,7 @@ import {FileService} from '../../../../service/file.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {AuthService} from '../../../../service/auth.service';
 import {ActivatedRoute} from '@angular/router';
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer} from '@angular/platform-browser';
 
 function getBase64(file: File): Promise<string | ArrayBuffer | null> {
   return new Promise((resolve, reject) => {
@@ -53,7 +53,56 @@ export class CommentComponent implements OnInit {
   commented = true;
 
   commentVisible = true;
-
+  // 雷达图的
+  option = {
+    radar: {
+      // shape: 'circle',
+      name: {
+        textStyle: {
+          color: '#fff',
+          backgroundColor: '#999',
+          borderRadius: 3,
+          padding: [3, 5]
+        }
+      },
+      indicator: [
+        {name: '销售', max: 6500},
+        {name: '管理', max: 16000},
+        {name: '信息技术', max: 30000},
+        {name: '客服', max: 38000},
+        {name: '研发', max: 52000}
+      ],
+      radius: 80
+    },
+    series: [{
+      name: '预算 vs 开销（Budget vs spending）',
+      type: 'radar',
+      data: [
+        {
+          value: [4300, 10000, 28000, 35000, 50000],
+          name: '预算分配',
+          label: {
+            show: true,
+            // tslint:disable-next-line:only-arrow-functions
+            formatter: function (params) {
+              return params.value;
+            }
+          }
+        },
+        {
+          value: [5000, 14000, 28000, 31000, 42000],
+          name: '实际开销',
+          label: {
+            show: true,
+            formatter: function (params) {
+              return params.value;
+            }
+          }
+        }
+      ]
+    }]
+  };
+  // 词云的
 
   constructor(private courseService: CourseService, private fileService: FileService, private msg: NzMessageService,
               private authService: AuthService, private route: ActivatedRoute, public sanitizer: DomSanitizer) {
@@ -107,7 +156,7 @@ export class CommentComponent implements OnInit {
     });
     formData.append('type', 'comment');
     console.log(formData);
-    if (this.fileList.length !== 0){
+    if (this.fileList.length !== 0) {
       this.fileService.uploadImages(formData).subscribe(
         (data) => {
           // @ts-ignore
@@ -129,7 +178,7 @@ export class CommentComponent implements OnInit {
         () => {
         }
       );
-    }else {
+    } else {
       this.handleSubmit();
     }
   }
@@ -178,7 +227,7 @@ export class CommentComponent implements OnInit {
   }
 
   isCommented(): void {
-    if (this.commentVisible){
+    if (this.commentVisible) {
       this.userId = this.authService.getUser().id;
       for (let i of this.commentList) {
         if (this.userId === i.userId) {
@@ -188,4 +237,10 @@ export class CommentComponent implements OnInit {
       }
     }
   }
+
+  /**
+   * 图标部分的数据处理
+   */
+
+
 }

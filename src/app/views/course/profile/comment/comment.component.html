@@ -84,7 +84,26 @@
     </div>
   </nz-tab>
   <nz-tab [nzTitle]="'图表'">
-    <div>图表格式的</div>
+    <div>
+      <div nz-row>
+        <div nz-col nzSpan="8" >
+          <h3>词云</h3>
+          <div>
+
+          </div>
+        </div>
+        <div nz-col nzSpan="8" >
+          <h3><b>好评率</b></h3>
+          <div style="text-align: center;margin-top: 130px;width: 100%">
+            <nz-progress [nzPercent]="99" nzType="circle"></nz-progress>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <h3><b>课程雷达图</b></h3>
+          <div echarts [options]="option" class="radar"></div>
+        </div>
+      </div>
+    </div>
   </nz-tab>
 </nz-tabset>
 
