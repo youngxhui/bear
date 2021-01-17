@@ -17,7 +17,7 @@ export class ShowCourse {
 
   institution: string;
 
-  level: Level;
+  level: Level = new Level();
 
   catalog: string;
 
