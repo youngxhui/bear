@@ -25,7 +25,7 @@ import { DemoModule } from '../demo/demo.module';
     InfoComponent,
     CommentComponent,
     NoteComponent,
-    AddComponent,
+    AddComponent
   ],
   imports: [
     CommonModule,

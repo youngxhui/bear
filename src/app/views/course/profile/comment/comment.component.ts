@@ -7,6 +7,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from '../../../../service/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import 'echarts-wordcloud/src/wordCloud.js';
 
 function getBase64(file: File): Promise<string | ArrayBuffer | null> {
   return new Promise((resolve, reject) => {
@@ -120,7 +121,42 @@ export class CommentComponent implements OnInit {
     ],
   };
   // 词云的
-
+  hotwordOption =
+    {
+      title: {
+        // text: '企业一专利热词'
+      },
+      tooltip: {},
+      series: [{
+        type: 'wordCloud',
+        gridSize: 2,
+        sizeRange: [12, 50],
+        // rotationRange: [-90, 90],
+        rotationRange: [-50, 50],
+        shape: 'triangle',
+        textStyle: {
+          normal: {
+            color: () => {
+              return 'rgb(' + [
+                Math.round(Math.random() * 160),
+                Math.round(Math.random() * 160),
+                Math.round(Math.random() * 160)
+              ].join(',') + ')';
+            }
+          },
+          emphasis: {
+            shadowBlur: 10,
+            shadowColor: 'rgba(0, 0, 0, 0.15)'
+          }
+        },
+        data: [
+          {name: '澎湃', value: 2},
+          {name: '澎', value: 3},
+          {name: '湃', value: 4},
+          {name: '1澎湃', value: 5},
+          {name: '澎湃2', value: 6},
+        ]
+      }]};
   constructor(
     private courseService: CourseService,
     private fileService: FileService,
