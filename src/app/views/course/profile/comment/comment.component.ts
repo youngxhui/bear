@@ -1,34 +1,50 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CourseService} from '../../../../service/course.service';
-import {Comment} from '../../../../entity/Comment';
-import {NzUploadFile} from 'ng-zorro-antd/upload';
-import {FileService} from '../../../../service/file.service';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {AuthService} from '../../../../service/auth.service';
-import {ActivatedRoute} from '@angular/router';
-import {DomSanitizer} from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { CourseService } from '../../../../service/course.service';
+import { Comment } from '../../../../entity/Comment';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { FileService } from '../../../../service/file.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { AuthService } from '../../../../service/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import 'echarts-wordcloud/src/wordCloud.js';
 
 function getBase64(file: File): Promise<string | ArrayBuffer | null> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
 }
 
 @Component({
   selector: 'app-course-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.less']
+  styleUrls: ['./comment.component.less'],
 })
 export class CommentComponent implements OnInit {
+  //  wordData: Array<AgWordCloudData> = [{ text: 'world', size: 10 }];
+  // Word Cloud Options
+  wordOption = {
+    settings: {
+      minFontSize: 10,
+      maxFontSize: 100,
+    },
+    margin: {
+      top: 10,
+      right: 10,
+      bottom: 10,
+      left: 10,
+    },
+    labels: true, // false to hide hover labels
+  };
 
   data: any[] = [];
   submitting = false;
   user = {
     author: 'Han Solo',
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
   };
   inputValue = '【整体评价】\n【难易程度】\n【优质部分】\n【缺陷部分】\n';
   recommend = 0;
@@ -62,46 +78,85 @@ export class CommentComponent implements OnInit {
           color: '#fff',
           backgroundColor: '#999',
           borderRadius: 3,
-          padding: [3, 5]
-        }
+          padding: [3, 5],
+        },
       },
       indicator: [
-        {name: '销售', max: 6500},
-        {name: '管理', max: 16000},
-        {name: '信息技术', max: 30000},
-        {name: '客服', max: 38000},
-        {name: '研发', max: 52000}
+        { name: '销售', max: 6500 },
+        { name: '管理', max: 16000 },
+        { name: '信息技术', max: 30000 },
+        { name: '客服', max: 38000 },
+        { name: '研发', max: 52000 },
       ],
-      radius: 80
+      radius: 80,
     },
-    series: [{
-      name: '预算 vs 开销（Budget vs spending）',
-      type: 'radar',
-      data: [
-        {
-          value: [4300, 10000, 28000, 35000, 50000],
-          name: '预算分配',
-          label: {
-            show: true,
-            // tslint:disable-next-line:only-arrow-functions
-            formatter: function (params) {
-              return params.value;
+    series: [
+      {
+        name: '预算 vs 开销（Budget vs spending）',
+        type: 'radar',
+        data: [
+          {
+            value: [4300, 10000, 28000, 35000, 50000],
+            name: '预算分配',
+            label: {
+              show: true,
+              // tslint:disable-next-line:only-arrow-functions
+              formatter: function (params) {
+                return params.value;
+              },
+            },
+          },
+          {
+            value: [5000, 14000, 28000, 31000, 42000],
+            name: '实际开销',
+            label: {
+              show: true,
+              formatter: function (params) {
+                return params.value;
+              },
+            },
+          },
+        ],
+      },
+    ],
+  };
+  // 词云的
+  hotwordOption =
+    {
+      title: {
+        // text: '企业一专利热词'
+      },
+      tooltip: {},
+      series: [{
+        type: 'wordCloud',
+        gridSize: 2,
+        sizeRange: [12, 50],
+        // rotationRange: [-90, 90],
+        rotationRange: [-50, 50],
+        shape: 'triangle',
+        textStyle: {
+          normal: {
+            color: () => {
+              return 'rgb(' + [
+                Math.round(Math.random() * 160),
+                Math.round(Math.random() * 160),
+                Math.round(Math.random() * 160)
+              ].join(',') + ')';
             }
+          },
+          emphasis: {
+            shadowBlur: 10,
+            shadowColor: 'rgba(0, 0, 0, 0.15)'
           }
         },
-        {
-          value: [5000, 14000, 28000, 31000, 42000],
-          name: '实际开销',
-          label: {
-            show: true,
-            formatter: function (params) {
-              return params.value;
-            }
-          }
-        }
-      ]
-    }]
-  };
+        data: [
+          {name: '澎湃', value: 2},
+          {name: '澎', value: 3},
+          {name: '湃', value: 4},
+          {name: '1澎湃', value: 5},
+          {name: '澎湃2', value: 6},
+        ]
+      }]};
   // 词云的
   // 第二排的图表中的图
   chartoption1 = {
@@ -188,17 +243,15 @@ export class CommentComponent implements OnInit {
     this.comment.userId = this.authService.getUser().id;
     this.comment.courseId = this.courseId;
     console.log('entity ', this.comment);
-    this.courseService.saveComment(this.comment).subscribe(
-      (data) => {
-        console.log('save res ', data);
-        this.inputValue = '';
-        this.comment = new Comment();
-        this.fileList = [];
-        this.score = 0;
-        this.costPerformance = 0;
-        this.recommend = 0;
-      }
-    );
+    this.courseService.saveComment(this.comment).subscribe((data) => {
+      console.log('save res ', data);
+      this.inputValue = '';
+      this.comment = new Comment();
+      this.fileList = [];
+      this.score = 0;
+      this.costPerformance = 0;
+      this.recommend = 0;
+    });
   }
 
   handlePreview = async (file: NzUploadFile) => {
@@ -208,12 +261,12 @@ export class CommentComponent implements OnInit {
     }
     this.previewImage = file.url || file.preview;
     this.previewVisible = true;
-  }
+  };
 
   beforeUpload = (file: NzUploadFile): boolean => {
     this.fileList = this.fileList.concat(file);
     return false;
-  }
+  };
 
   handleUpload(): void {
     const formData = new FormData();
@@ -242,8 +295,7 @@ export class CommentComponent implements OnInit {
         () => {
           console.log('Error');
         },
-        () => {
-        }
+        () => {}
       );
     } else {
       this.handleSubmit();
@@ -278,15 +330,15 @@ export class CommentComponent implements OnInit {
   }
 
   getAllComment(pi: number): void {
-    this.courseService.getAllCommentByCourseId(this.courseId, pi).subscribe(
-      (data) => {
+    this.courseService
+      .getAllCommentByCourseId(this.courseId, pi)
+      .subscribe((data) => {
         console.log('req ', data.data);
         this.commentList = data.data.content;
         this.totalPage = data.data.totalPages;
         this.totalEle = data.data.totalElements;
         this.isCommented();
-      }
-    );
+      });
   }
 
   changePageIndex(): void {
@@ -308,6 +360,4 @@ export class CommentComponent implements OnInit {
   /**
    * 图标部分的数据处理
    */
-
-
 }

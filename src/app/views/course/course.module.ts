@@ -20,13 +20,20 @@ import {NzStatisticModule} from 'ng-zorro-antd/statistic';
 
 
 @NgModule({
-  declarations: [CourseComponent, ProfileComponent, InfoComponent, CommentComponent, NoteComponent, AddComponent],
-  imports: [CommonModule,
+  declarations: [
+    CourseComponent,
+    ProfileComponent,
+    InfoComponent,
+    CommentComponent,
+    NoteComponent,
+    AddComponent
+  ],
+  imports: [
+    CommonModule,
     CourseRoutingModule,
     SharedModule,
     ReactiveFormsModule, FormsModule,
     ComponentsModule, NzLayoutModule, NzCascaderModule, NzDescriptionsModule, NzResultModule, NzImageModule,
     NgxEchartsModule, NzStatisticModule],
 })
-export class CourseModule {
-}
+export class CourseModule {}
