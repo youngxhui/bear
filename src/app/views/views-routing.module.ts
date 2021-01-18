@@ -15,8 +15,7 @@ const routes: Routes = [{
     {path: 'course', loadChildren: () => import('./course/course.module').then(m => m.CourseModule)},
     {path: 'roadmap', loadChildren: () => import('./roadmap/roadmap.module').then(m => m.RoadmapModule)},
     {path: 'person', loadChildren: () => import('./person/person.module').then(m => m.PersonModule)},
-    {path: 'note', loadChildren: () => import('./note-item/note-item.module').then(m => m.NoteItemModule)},
-    {path: 'demo', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)},
+    {path: 'note', loadChildren: () => import('./note-item/note-item.module').then(m => m.NoteItemModule)}
   ]
 },
   {
