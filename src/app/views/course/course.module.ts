@@ -17,6 +17,7 @@ import {NzResultModule} from 'ng-zorro-antd/result';
 import {NzImageModule} from 'ng-zorro-antd/image';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {NzStatisticModule} from 'ng-zorro-antd/statistic';
+import { LearnComponent } from './learn/learn.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {NzStatisticModule} from 'ng-zorro-antd/statistic';
     InfoComponent,
     CommentComponent,
     NoteComponent,
-    AddComponent
+    AddComponent,
+    LearnComponent
   ],
   imports: [
     CommonModule,

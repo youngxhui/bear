@@ -20,26 +20,35 @@ export class CourseComponent implements OnInit {
    * 被选中的 id
    */
   selectTip = 0;
+  selectSub = 0;
   courseList: Array<Course> = [];
 
   pageIndex = 1;
   total = 10;
   pageSize = 10;
+  isSub = false;
 
   constructor(private courseService: CourseService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     // img =  img );
-    const learnId = Number(this.route.snapshot.paramMap.get('id'));
-    if (learnId !== 0) {
-      this.getLearnAndSub(learnId);
+    const routeTip = Number(this.route.snapshot.paramMap.get('tip'));
+    this.selectSub = Number(this.route.snapshot.paramMap.get('subtip'));
+    this.isSub = true;
+    if (routeTip !== 0) {
+      this.selectTip = routeTip;
+      this.courseService.getTip().subscribe((result) => {
+        this.tips = result.data;
+        this.getSubTip(this.tips[0].id);
+      });
+      this.getCourseBySubTipId();
     } else {
-      this.getTip();
+        this.getTips();
     }
   }
 
-  getTip(): void {
+  getTips(): void {
     this.courseService.getTip().subscribe(({data}) => {
       this.tips = data;
       this.selectTip = this.tips[0].id;
@@ -59,12 +68,17 @@ export class CourseComponent implements OnInit {
    * @param tipId tipId
    */
   changeTip(tipId: number): void {
-    this.getSubTip(tipId);
-    this.selectTip = tipId;
-    this.getCourseByTipId();
+    if (!this.isSub){
+      this.getSubTip(tipId);
+      this.selectTip = tipId;
+      this.getCourseByTipId();
+    }else{
+      this.isSub = false;
+    }
   }
 
   getCourseByTipId(): void {
+    console.log('exe');
     this.courseService.getCourseByTip(this.selectTip, this.pageIndex - 1, this.pageSize).subscribe(({data}) => {
       // this.pageSize = data.totalElements;
       this.total = data.totalElements;
@@ -72,18 +86,26 @@ export class CourseComponent implements OnInit {
     });
   }
 
-  /**
-   * 带learnid时候的请求
-   */
-  getLearnAndSub(learnId: number): void {
-    this.courseService.getTipAndCourse(learnId).subscribe(({data}) => {
-      console.log('data is ', data);
-      data.resultList.map(item => {
-        this.courseList.concat(item.courseList);
-        this.subTips.push(item.subTip);
-      });
+  changeSubTip(subTipId: number): void {
+    this.selectSub = subTipId;
+    this.getCourseBySubTipId();
+  }
+
+  getCourseBySubTipId(): void {
+    this.courseService.getCourseBySubTip(this.selectSub, this.pageIndex - 1).subscribe(({data}) => {
+      // this.pageSize = data.totalElements;
+      this.total = data.totalElements;
+      this.courseList = data.content;
+      console.log('course list', this.courseList);
     });
-    console.log('here res ', this.courseList, this.subTips);
+  }
+
+  changePage(): void {
+    if (this.isSub) {
+      this.getCourseBySubTipId();
+    } else {
+      this.getCourseByTipId();
+    }
   }
 
 }

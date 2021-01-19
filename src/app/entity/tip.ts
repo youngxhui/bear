@@ -3,4 +3,5 @@ export class Tip {
   name: string;
   createTime: string;
   updateTime: string;
+  enable: boolean;
 }

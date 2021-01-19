@@ -9,7 +9,7 @@ import Page from '../entity/page';
 import {TipAndSub} from '../entity/tipAndSub';
 import {LearnAndSub} from '../entity/learnAndSub';
 import {ShowCourse} from '../entity/ShowCourse';
-import {Comment} from "../entity/Comment";
+import {Comment} from '../entity/Comment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,10 @@ export class CourseService {
 
   getCourseByTip(tipId: number, page: number, size: number): Observable<Result<Page<Course>>> {
     return this.httpClient.get <Result<Page<Course>>>(`/course/tip/${tipId}?page=${page}&size=${size}`);
+  }
+
+  getCourseBySubTip(subTipId: number, page: number): Observable<Result<Page<Course>>> {
+    return this.httpClient.get <Result<Page<Course>>>(`/course/subTip/${subTipId}?page=${page}&size=10`);
   }
 
 
@@ -59,4 +63,5 @@ export class CourseService {
   getFigureData(courseId: number): Observable<Result<any>> {
     return this.httpClient.get<Result<any>>('/goodfigure');
   }
+
 }

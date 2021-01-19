@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {RoadMapService} from "../../service/road-map.service";
+import {RoadMapService} from '../../service/road-map.service';
 
 
 @Component({

@@ -1,0 +1,22 @@
+<div tab-background>
+  <nz-tabset>
+    <nz-tab *ngFor="let subtip of subTips" [nzTitle]="subtip.name" (nzSelect)="changeSubTip(subtip.id)">
+      <nz-divider nzPlain></nz-divider>
+      排序方式：
+      <nz-select [(ngModel)]="selectSort">
+        <nz-option nzValue="hot" nzLabel="热度"></nz-option>
+        <nz-option nzValue="new" nzLabel="最新"></nz-option>
+      </nz-select>
+    </nz-tab>
+  </nz-tabset>
+</div>
+
+<div subTip>
+  <div card-content>
+    <app-course-card *ngFor="let course of courseList; let i = index" card [routerLink]="'/course/profile/'+[course.id]"
+                     [course]="course"></app-course-card>
+  </div>
+</div>
+
+<nz-pagination [(nzPageIndex)]="pageIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="10"
+               (nzPageIndexChange)="getCourseBySubTipId()"></nz-pagination>

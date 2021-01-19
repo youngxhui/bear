@@ -5,14 +5,13 @@
 
   [nz-menu] {
     width: 240px;
-    border-radius: 10px 0 0 10px;
   }
 
 
   [nz-carousel-content] {
-    width: 80%;
+    width: 100%;
     text-align: center;
-    height: 288.08px;
+    height: 384px;
     line-height: 160px;
     background: #364d79;
     color: #fff;
@@ -34,6 +33,14 @@
 
 [nz-menu-item] {
   float: left;
+}
+
+[nz-menu]:first-child {
+  border-radius: 10px 0 0 0;
+}
+
+[nz-menu]:last-child {
+  border-radius: 0 0 0 10px;
 }
 
 
