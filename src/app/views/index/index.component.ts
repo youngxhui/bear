@@ -17,11 +17,17 @@ export class IndexComponent implements OnInit {
 
   private indexService: IndexService;
 
-  constructor(indexService: IndexService) {
+  constructor(indexService: IndexService, private courseService: CourseService) {
     this.indexService = indexService;
 
   }
 
   ngOnInit(): void {
+    this.getCourseByTipId();
+  }
+  getCourseByTipId(): void {
+    this.courseService.getCourseByTip(1, 0, 10).subscribe(({data}) => {
+      this.courseList = data.content;
+    });
   }
 }

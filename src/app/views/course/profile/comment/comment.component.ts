@@ -82,22 +82,22 @@ export class CommentComponent implements OnInit {
         },
       },
       indicator: [
-        { name: '销售', max: 6500 },
-        { name: '管理', max: 16000 },
-        { name: '信息技术', max: 30000 },
-        { name: '客服', max: 38000 },
-        { name: '研发', max: 52000 },
+        { name: '难度', max: 5 },
+        { name: '质量', max: 5 },
+        { name: '人气', max: 5 },
+        { name: '性价比', max: 5 },
+        { name: '推荐度', max: 5 },
       ],
       radius: 80,
     },
     series: [
       {
-        name: '预算 vs 开销（Budget vs spending）',
+        name: '评价情况',
         type: 'radar',
         data: [
           {
-            value: [4300, 10000, 28000, 35000, 50000],
-            name: '预算分配',
+            value: [4.8, 4.7, 4.5, 4.9, 5.0],
+            name: '本周情况',
             label: {
               show: true,
               // tslint:disable-next-line:only-arrow-functions
@@ -107,8 +107,8 @@ export class CommentComponent implements OnInit {
             },
           },
           {
-            value: [5000, 14000, 28000, 31000, 42000],
-            name: '实际开销',
+            value: [4.9, 4.6, 4.8, 4.7, 4.7],
+            name: '本月情况',
             label: {
               show: true,
               formatter: function (params) {
@@ -133,7 +133,7 @@ export class CommentComponent implements OnInit {
         sizeRange: [12, 50],
         // rotationRange: [-90, 90],
         rotationRange: [-50, 50],
-        shape: 'triangle',
+        shape: 'circle',
         textStyle: {
           normal: {
             color: () => {
@@ -150,11 +150,11 @@ export class CommentComponent implements OnInit {
           }
         },
         data: [
-          {name: '澎湃', value: 2},
-          {name: '澎', value: 3},
-          {name: '湃', value: 4},
-          {name: '1澎湃', value: 5},
-          {name: '澎湃2', value: 6},
+          {name: '性价比高', value: 2},
+          {name: '通俗易懂', value: 3},
+          {name: '代码清晰', value: 4},
+          {name: '新颖', value: 5},
+          {name: '容易上手', value: 6},
         ]
       }]};
   // 词云的
@@ -193,34 +193,34 @@ export class CommentComponent implements OnInit {
   listOfData = [
     {
       key: '1',
-      name: 'John Brown',
+      name: '3',
       age: 32,
-      address: 'New York No. 1 Lake Park'
+      address: '-10%'
     },
     {
       key: '2',
-      name: 'Jim Green',
+      name: '2',
       age: 42,
-      address: 'London No. 1 Lake Park'
+      address: '10%'
     },
     {
       key: '3',
-      name: 'Joe Black',
+      name: '1',
       age: 32,
-      address: 'Sidney No. 1 Lake Park'
+      address: '320%'
     }
   ];
   // 课程热度
   hotoption = {
     xAxis: {
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
     },
     yAxis: {
       type: 'value'
     },
     series: [{
-      data: [820, 932, 901, 934, 1290, 1330, 1320],
+      data: [5, 4.0, 4.1, 4.3, 4.5, 4.5, 4.55, 4.6, 4.65, 4.47, 4.8, 4.76],
       type: 'line'
     }]
   };

@@ -3,5 +3,5 @@
 
 <div card-content>
   <app-course-card *ngFor="let course of courseList" [course]="course"
-                   card [routerLink]="[1]"></app-course-card>
+                   card [routerLink]="'/course/profile/'+[course.id]"></app-course-card>
 </div>

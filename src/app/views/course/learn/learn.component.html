@@ -1,7 +1,6 @@
 <div tab-background>
   <nz-tabset>
     <nz-tab *ngFor="let subtip of subTips" [nzTitle]="subtip.name" (nzSelect)="changeSubTip(subtip.id)">
-      <nz-divider nzPlain></nz-divider>
       排序方式：
       <nz-select [(ngModel)]="selectSort">
         <nz-option nzValue="hot" nzLabel="热度"></nz-option>

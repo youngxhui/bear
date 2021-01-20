@@ -57,7 +57,7 @@
                 (nzOnCancel)="previewVisible = false"
               >
                 <ng-template #modalContent>
-                  <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                  <img [src]="previewImage" [ngStyle]="{ width: '100%' }"/>
                 </ng-template>
               </nz-modal>
             </div>
@@ -114,11 +114,8 @@
                     *ngIf="pic.length !== 0 && pic !== null"
                     nz-image
                     width="80px"
-                    [src]="
-                      this.sanitizer.bypassSecurityTrustResourceUrl(
-                        'http://localhost:8800/' + pic
-                      )
-                    "
+                    height="80px"
+                    [src]="this.sanitizer.bypassSecurityTrustResourceUrl('http://localhost:8800/' + pic)"
                     alt=""
                   />
                 </nz-image-group>
@@ -157,38 +154,53 @@
       </div>
       <div>
         <div nz-row style="height: 200px">
-          <div nz-col nzSpan="12" >
+          <div nz-col nzSpan="12">
             <h3><b>好评变化</b></h3>
             <div nz-row>
-              <div nz-col nzSpan="12" >
-<!--                <nz-statistic [nzValue]="(1949101 | number)!" [nzTitle]="'Active Users'"></nz-statistic>-->
+              <div nz-col nzSpan="12" style="padding-left: 40px">
+                <nz-statistic [nzValue]="(1949101 | number)!" [nzTitle]="'好评数'"></nz-statistic>
+              </div>
+              <div nz-col nzSpan="12" style="padding-left: 40px">
+                <nz-statistic [nzValue]="(90.0 | number)!" [nzTitle]="'好评率'"></nz-statistic>
+              </div>
+            </div>
+            <div nz-row>
+              <div nz-col nzSpan="12">
                 <div echarts [options]="chartoption1" class="line"></div>
               </div>
-              <div nz-col nzSpan="12" >
+              <div nz-col nzSpan="12">
                 <div echarts [options]="chartoption1" class="line"></div>
               </div>
             </div>
           </div>
-          <div nz-col nzSpan="12" >
+          <div nz-col nzSpan="12">
             <h3><b>推荐度和性价比</b></h3>
             <div nz-row>
-              <div nz-col nzSpan="12" >
+              <div nz-col nzSpan="12" style="padding-left: 40px">
+                <nz-statistic [nzValue]="(5.0 | number)!" [nzTitle]="'推荐度'"></nz-statistic>
+              </div>
+              <div nz-col nzSpan="12" style="padding-left: 40px">
+                <nz-statistic [nzValue]="(4.9 | number)!" [nzTitle]="'性价比'"></nz-statistic>
+              </div>
+            </div>
+            <div nz-row>
+              <div nz-col nzSpan="12">
                 <div echarts [options]="chartoption1" class="line"></div>
               </div>
-              <div nz-col nzSpan="12" >
+              <div nz-col nzSpan="12">
                 <div echarts [options]="chartoption1" class="line"></div>
               </div>
             </div>
           </div>
         </div>
         <div nz-row style="padding: 10px">
-          <div nz-col style="padding: 5px" nzSpan="12" >
+          <div nz-col style="padding: 5px" nzSpan="12">
             <nz-table #basicTable [nzData]="listOfData">
               <thead>
               <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Address</th>
+                <th>周数</th>
+                <th>用户数</th>
+                <th>周涨幅</th>
               </tr>
               </thead>
               <tbody>
@@ -200,13 +212,13 @@
               </tbody>
             </nz-table>
           </div>
-          <div nz-col style="padding: 5px" nzSpan="12" >
+          <div nz-col style="padding: 5px" nzSpan="12">
             <nz-table #basicTable [nzData]="listOfData">
               <thead>
               <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Address</th>
+                <th>周数</th>
+                <th>推荐度</th>
+                <th>性价比</th>
               </tr>
               </thead>
               <tbody>

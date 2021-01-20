@@ -2,7 +2,7 @@
     <nz-tabset>
         <nz-tab *ngFor="let tip of tips" [nzTitle]="tip.name" (nzSelect)="changeTip(tip.id)">
             分类：
-            <button class="text-btn" nz-button nzType="text">全部</button>
+            <button class="text-btn" nz-button nzType="text" (click)="getCourseByTipId()">全部</button>
             <button class="text-btn" nz-button nzType="text" *ngFor="let subTip of subTips" (click)="changeSubTip(subTip.id)">{{subTip.name}}</button>
             <nz-divider nzPlain></nz-divider>
             排序方式：
