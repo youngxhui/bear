@@ -11,6 +11,8 @@ export class CourseCardComponent implements OnInit {
 
   @Input()
   course: Course = new Course();
+  @Input()
+  rate = 0;
 
   constructor(private sanitizer: DomSanitizer) {
   }

@@ -2,7 +2,9 @@
   <nz-page-header class="site-page-header" (nzBack)="onBack()" nzBackIcon nzTitle="返回课程详情" nzSubtitle="{{title}}">
   </nz-page-header>
   <div style="padding: 24px;width: 100%">
-    <h1><b>{{title}}</b></h1>
+    <h1><b>{{title}}</b>&nbsp;&nbsp;&nbsp;
+      <i nz-icon nzType="star" nzTheme="outline" style="font-size: 22px;cursor: pointer" [nzTheme]="like > 0 ? 'twotone' : 'outline'"
+         (click)="favorite()"></i></h1>
     <div markdown [data]="markdown"></div>
   </div>
 </nz-content>

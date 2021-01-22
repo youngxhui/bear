@@ -77,9 +77,8 @@
             nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
             nzDescription="{{item.content}}"
           >
-            {{item.costPerformance}}
             <nz-list-item-meta-title>
-              <a href="https://ng.ant.design">去看该课程</a>
+              <a [routerLink]="'/course/profile/'+item.courseId">去看该课程</a>
             </nz-list-item-meta-title>
           </nz-list-item-meta>
         </nz-list-item>

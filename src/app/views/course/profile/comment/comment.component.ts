@@ -8,6 +8,7 @@ import { AuthService } from '../../../../service/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import 'echarts-wordcloud/src/wordCloud.js';
+import {LikedParam} from '../../../../entity/LikedParam';
 
 function getBase64(file: File): Promise<string | ArrayBuffer | null> {
   return new Promise((resolve, reject) => {
@@ -24,21 +25,6 @@ function getBase64(file: File): Promise<string | ArrayBuffer | null> {
   styleUrls: ['./comment.component.less'],
 })
 export class CommentComponent implements OnInit {
-  //  wordData: Array<AgWordCloudData> = [{ text: 'world', size: 10 }];
-  // Word Cloud Options
-  wordOption = {
-    settings: {
-      minFontSize: 10,
-      maxFontSize: 100,
-    },
-    margin: {
-      top: 10,
-      right: 10,
-      bottom: 10,
-      left: 10,
-    },
-    labels: true, // false to hide hover labels
-  };
 
   data: any[] = [];
   submitting = false;
@@ -224,6 +210,8 @@ export class CommentComponent implements OnInit {
       type: 'line'
     }]
   };
+  // 评论点赞用于变换style的数组，全0
+  great = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 
   constructor(private courseService: CourseService, private fileService: FileService, private msg: NzMessageService,
@@ -242,9 +230,7 @@ export class CommentComponent implements OnInit {
     this.comment.content = this.inputValue;
     this.comment.userId = this.authService.getUser().id;
     this.comment.courseId = this.courseId;
-    console.log('entity ', this.comment);
     this.courseService.saveComment(this.comment).subscribe((data) => {
-      console.log('save res ', data);
       this.inputValue = '';
       this.comment = new Comment();
       this.fileList = [];
@@ -275,7 +261,6 @@ export class CommentComponent implements OnInit {
       formData.append('files', file);
     });
     formData.append('type', 'comment');
-    console.log(formData);
     if (this.fileList.length !== 0) {
       this.fileService.uploadImages(formData).subscribe(
         (data) => {
@@ -288,7 +273,6 @@ export class CommentComponent implements OnInit {
             s = s + rootPath + '/' + temp[i] + '】【';
           }
           this.comment.picture = s;
-          console.log('s is ', s);
           this.handleSubmit();
           this.msg.success('评论成功');
         },
@@ -315,13 +299,25 @@ export class CommentComponent implements OnInit {
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisible = false;
   }
 
-  like(): void {
-    this.likes = 1;
-    this.dislikes = 0;
+  like(commentId: number, index: number): void {
+    if (this.great[index] === 0){
+      const liked = new LikedParam();
+      liked.commentId = commentId;
+      liked.userId = this.userId;
+      liked.value = 1;
+      this.great[index] = 1;
+      // this.courseService.likeClick(liked).subscribe(
+      //   (data) => {
+      //     this.commentList[index].likeCount += 1;
+      //     console.log(data);
+      //   }
+      // );
+    }else {
+      this.great[index] = 0;
+    }
   }
 
   dislike(): void {
@@ -333,7 +329,6 @@ export class CommentComponent implements OnInit {
     this.courseService
       .getAllCommentByCourseId(this.courseId, pi)
       .subscribe((data) => {
-        console.log('req ', data.data);
         this.commentList = data.data.content;
         this.totalPage = data.data.totalPages;
         this.totalEle = data.data.totalElements;

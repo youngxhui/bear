@@ -17,7 +17,7 @@
 <div subTip>
     <div card-content>
         <app-course-card *ngFor="let course of courseList; let i = index" card [routerLink]="'/course/profile/'+[course.id]"
-                         [course]="course"></app-course-card>
+                         [course]="course" [rate]="rateList[i].rate"></app-course-card>
     </div>
 </div>
 

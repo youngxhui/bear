@@ -1,6 +1,6 @@
 <nz-card nzHoverable course-card style="width:240px" [nzCover]="coverTemplate">
     <nz-card-meta nzTitle="{{course.name}}"></nz-card-meta>
-    <app-rate value="{{course.name}}"></app-rate>
+    <app-rate value="{{rate+1}}"></app-rate>
 </nz-card>
 <ng-template #coverTemplate>
     <!-- <img course-img alt="example" [src]="this.sanitizer.bypassSecurityTrustResourceUrl('http://localhost:8800/'+course.cover.split('】【')[0])"

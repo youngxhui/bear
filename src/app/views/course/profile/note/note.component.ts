@@ -10,6 +10,7 @@ interface ItemData {
   description: string;
   content: string;
   entity: Note;
+  id: number;
 }
 
 @Component({
@@ -50,7 +51,8 @@ export class NoteComponent implements OnInit {
             avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
             description: '坚持写笔记，分享快乐多',
             content: `${temp[index].content.substr(0, 20).replace('#', '')}`,
-            entity: temp[index]
+            entity: temp[index],
+            id: temp[index].id
           };
         });
       }
@@ -61,13 +63,14 @@ export class NoteComponent implements OnInit {
     this.loadData(this.pageIndex - 1);
   }
 
-  detail(note: Note): void {
-    this.soonOutput.emit(note);
+  detail(note: Note, id: number): void {
+    // this.soonOutput.emit(note);
     this.router.navigate(['/note/detail'], {queryParams: {
       content: note.content,
         title: note.title,
         useId: note.userId,
-        courseId: note.courseId
+        courseId: note.courseId,
+        noteId: id
     }});
   }
 }

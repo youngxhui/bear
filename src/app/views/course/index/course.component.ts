@@ -22,6 +22,7 @@ export class CourseComponent implements OnInit {
   selectTip = 0;
   selectSub = 0;
   courseList: Array<Course> = [];
+  rateList = [];
 
   pageIndex = 1;
   total = 10;
@@ -78,11 +79,12 @@ export class CourseComponent implements OnInit {
   }
 
   getCourseByTipId(): void {
-    console.log('exe');
     this.courseService.getCourseByTip(this.selectTip, this.pageIndex - 1, this.pageSize).subscribe(({data}) => {
       // this.pageSize = data.totalElements;
       this.total = data.totalElements;
       this.courseList = data.content;
+      this.rateList = data.content;
+      console.log('exe', data.content);
     });
   }
 
@@ -96,6 +98,7 @@ export class CourseComponent implements OnInit {
       // this.pageSize = data.totalElements;
       this.total = data.totalElements;
       this.courseList = data.content;
+      this.rateList = data.content;
       console.log('course list', this.courseList);
     });
   }

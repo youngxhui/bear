@@ -66,6 +66,7 @@ export class PersonComponent implements OnInit {
       (data) => {
         this.commentList = data.data.content;
         this.totalElm = data.data.totalElements;
+        console.log('12222', this.commentList);
       }
     );
   }

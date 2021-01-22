@@ -10,6 +10,7 @@ import {TipAndSub} from '../entity/tipAndSub';
 import {LearnAndSub} from '../entity/learnAndSub';
 import {ShowCourse} from '../entity/ShowCourse';
 import {Comment} from '../entity/Comment';
+import {LikedParam} from "../entity/LikedParam";
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,10 @@ export class CourseService {
 
   getFigureData(courseId: number): Observable<Result<any>> {
     return this.httpClient.get<Result<any>>('/goodfigure');
+  }
+
+  likeClick(likedParam: LikedParam): Observable<Result<any>> {
+    return this.httpClient.post<Result<any>>('/liked', likedParam);
   }
 
 }
