@@ -9,6 +9,7 @@ import {Comment} from '../../entity/Comment';
 import {Note} from '../../entity/Note';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NoteShow} from '../../entity/NoteShow';
+import {NoteService} from '../../service/note.service';
 
 interface ItemData {
   href: string;
@@ -30,16 +31,19 @@ export class PersonComponent implements OnInit {
   userId = 0;
   commentList = [];
   noteList: ItemData[] = [];
+  favoriteList: ItemData[] = [];
   loading = false;
   pageIndex = 1;
   totalElm = 0;
   noteIndex = 1;
   totalNotes = 0;
+  favIndex = 1;
+  totalFav = 0;
   // 详细的某个note的信息
   @Output()
   soonOutput: EventEmitter<Note> = new EventEmitter();
 
-  constructor(private personService: PersonService, private authService: AuthService,
+  constructor(private personService: PersonService, private authService: AuthService, private noteService: NoteService,
               private route: ActivatedRoute, private router: Router) {
   }
 
@@ -59,6 +63,7 @@ export class PersonComponent implements OnInit {
 
   collectClick(): void {
     this.section = 1;
+    this.getFavorite();
   }
 
   getUerComments(): void {
@@ -98,6 +103,26 @@ export class PersonComponent implements OnInit {
         useId: note.userId,
         courseId: note.courseId
       }});
+  }
+
+  getFavorite(): void {
+    this.personService.getByUserId(this.userId, this.favIndex - 1).subscribe(
+      (data) => {
+        console.log(data);
+        this.totalFav = data.data.length;
+        const temp = data.data;
+        this.favoriteList = new Array(temp.length).fill({}).map((_, index) => {
+          return {
+            href: 'http://localhost:4200/note/detail',
+            title: `${temp[index].title}`,
+            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            description: '坚持写笔记，分享快乐多',
+            content: `${temp[index].content.substr(0, 20).replace('#', '')}`,
+            entity: temp[index]
+          };
+        });
+      }
+    );
   }
 
 }

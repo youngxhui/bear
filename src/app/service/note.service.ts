@@ -20,4 +20,5 @@ export class NoteService {
   saveFavorite(note: NoteParam): Observable<Result<Array<any>>> {
     return this.httpClient.post<Result<Array<any>>>('/favorite', note);
   }
+
 }

@@ -69,4 +69,8 @@ export class CourseService {
     return this.httpClient.post<Result<any>>('/liked', likedParam);
   }
 
+  cancleLike(likedParam: LikedParam): Observable<Result<any>> {
+    return this.httpClient.post<Result<any>>('/liked/dislike', likedParam);
+  }
+
 }

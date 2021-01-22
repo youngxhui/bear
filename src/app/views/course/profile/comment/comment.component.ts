@@ -302,21 +302,28 @@ export class CommentComponent implements OnInit {
     this.isVisible = false;
   }
 
-  like(commentId: number, index: number): void {
-    if (this.great[index] === 0){
-      const liked = new LikedParam();
-      liked.commentId = commentId;
-      liked.userId = this.userId;
+  like(commentId: number, type: number, index: number): void {
+    const liked = new LikedParam();
+    liked.userId = this.userId;
+    liked.commentId = commentId;
+    if (type === 0){
       liked.value = 1;
-      this.great[index] = 1;
-      // this.courseService.likeClick(liked).subscribe(
-      //   (data) => {
-      //     this.commentList[index].likeCount += 1;
-      //     console.log(data);
-      //   }
-      // );
+      this.courseService.likeClick(liked).subscribe(
+        (data) => {
+          this.commentList[index].likeCount += 1;
+          this.great[index] = 1;
+          console.log(data);
+        }
+      );
     }else {
-      this.great[index] = 0;
+      liked.value = 0;
+      this.courseService.likeClick(liked).subscribe(
+        (data) => {
+          this.commentList[index].likeCount -= 1;
+          this.great[index] = 0;
+          console.log(data);
+        }
+      );
     }
   }
 
@@ -329,6 +336,7 @@ export class CommentComponent implements OnInit {
     this.courseService
       .getAllCommentByCourseId(this.courseId, pi)
       .subscribe((data) => {
+        console.log('12', data.data.content);
         this.commentList = data.data.content;
         this.totalPage = data.data.totalPages;
         this.totalEle = data.data.totalElements;

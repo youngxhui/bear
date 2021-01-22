@@ -122,7 +122,7 @@
               </div>
             </nz-comment-content>
             <nz-comment-action>
-              <i nz-tooltip nzTitle="Like" nz-icon nzType="like" [nzTheme]="great[i] > 0 ? 'twotone' : 'outline'" (click)="like(item.id, i)"></i>
+              <i nz-tooltip nzTitle="Like" nz-icon nzType="like" [nzTheme]="(item.type > 0||great[i]>0) ? 'twotone' : 'outline'" (click)="like(item.id, item.type, i)"></i>
               <span class="count like">{{ item.likeCount }}</span>
             </nz-comment-action>
           </nz-comment>

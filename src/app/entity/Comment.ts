@@ -12,4 +12,5 @@ export class Comment {
   top: number;
   like: number;
   dislike: number;
+  type: number;
 }

@@ -39,11 +39,15 @@ export class NoteDetailComponent implements OnInit {
     if (this.like === 0){
       noteParam.value = 1;
       console.log(noteParam);
-      // this.noteService.saveFavorite(noteParam).subscribe();
+      // this.noteService.saveFavorite(noteParam).subscribe(
+      //   (data) => {
+      //     console.log(data);
+      //   }
+      // );
       this.like = 1;
     }else {
       noteParam.value = 0;
-      console.log(noteParam);
+      // this.noteService.saveFavorite(noteParam).subscribe();
       this.like = 0;
     }
   }
