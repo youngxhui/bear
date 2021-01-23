@@ -5,6 +5,7 @@ import Result from '../entity/result';
 import Page from '../entity/page';
 import {NoteShow} from '../entity/NoteShow';
 import {Note} from '../entity/Note';
+import {UpdateUser} from "../entity/UpdateUser";
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ export class PersonService {
 
   getByUserId(userId: number, page: number): Observable<Result<Array<NoteShow>>> {
     return this.httpClient.get<Result<Array<NoteShow>>>(`/favorite/${userId}?page=${page}&size=10`);
+  }
+
+  updateUser(updateUser: UpdateUser): Observable<Result<Array<any>>> {
+    return this.httpClient.put<Result<Array<any>>>('/user', updateUser);
   }
 }

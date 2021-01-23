@@ -19,9 +19,39 @@
 
   <!--extra-->
   <nz-page-header-extra>
-    <!--    <button nz-button>Operation</button>-->
-    <!--    <button nz-button>Operation</button>-->
-    <button nz-button nzType="primary">修改信息</button>
+    <button nz-button nzType="primary" (click)="showModal()">
+      <span>修改信息</span>
+    </button>
+    <nz-modal
+      [(nzVisible)]="isVisible"
+      nzTitle="修改个人信息"
+      (nzOnCancel)="handleCancel()"
+      (nzOnOk)="handleOk()"
+      [nzOkLoading]="isOkLoading"
+    >
+      <form nz-form [formGroup]="validateForm">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzFor="nickname" nzRequired>
+            用户名
+          </nz-form-label>
+          <nz-form-control [nzSpan]="12" [nzSm]="14" [nzXs]="24" nzErrorTip="请输入用户名">
+            <input nz-input id="nickname" formControlName="nickname" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>个人简介</nz-form-label>
+          <nz-form-control [nzSpan]="12" nzErrorTip="请输入个人简介">
+            <textarea formControlName="description" nz-input rows="2" placeholder="来介绍一下自己吧~"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>上传头像</nz-form-label>
+          <nz-upload [(nzFileList)]="avatarFile" [nzBeforeUpload]="beforeAvatarUpload" [nzMultiple]="false" [nzLimit]="1">
+            <button nz-button><i nz-icon nzType="upload"></i>上传新头像</button>
+          </nz-upload>
+        </nz-form-item>
+      </form>
+    </nz-modal>
   </nz-page-header-extra>
 
   <!--content-->
